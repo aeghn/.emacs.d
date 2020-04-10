@@ -1,0 +1,87 @@
+* WAIT epaint
+* TODO 归档后自动保存
+  org mode 9.4
+* DONE emacs 高亮括号引号
+  CLOSED: [2020-03-02 Mon 14:30]
+** CANCELED 不成对的红色高亮
+   CLOSED: [2020-03-02 Mon 14:29]
+* emacs 中文格式化
+  https://emacs-china.org/t/org-mode/597
+* DONE emacs 博客
+  CLOSED: [2020-03-11 Wed 22:48]
+  使用 org-static-blog
+** DONE 添加顶栏
+   CLOSED: [2020-03-03 Tue 11:05]
+** DONE 文章置中用来写文章
+   CLOSED: [2020-03-03 Tue 11:06]
+** DONE 修改 index 样式
+   CLOSED: [2020-03-12 Thu 01:27]
+** 修改 toc 样式
+* DONE Use mark-ring
+  CLOSED: [2020-03-12 Thu 01:23]
+  Mark a line by hit =C-Space= twice and hit =C-x j= to check =counsel-mark-ring=.
+* DONE New =C-a=
+  CLOSED: [2020-03-12 Thu 21:32]
+  If point is at beginning of indention of line then go to the beginning of the line.
+  Else go to the beginning of indention of line.
+* DONE Windows and buffers management
+  CLOSED: [2020-03-12 Thu 21:49]
+  Bind to =C-o= to call =chin/windows=
+** The number of windows is less than three in a frame
+   =C-n= : Go to next buffer
+   =C-p= : Go to previous buffer
+   =C-o= : Invoke =counsel-ibuffer=
+   =o=   : Invoke =ace-window=
+** The number of windows is greater than or equal to three in a frame
+   Call =ace-window= directly.
+   And bind those keys in =ace-window=, which could help every number of pressing key in a balance state.
+* DONE init-reader.el
+  CLOSED: [2020-03-20 Fri 15:44]
+** DONE centaur-read-mode
+   CLOSED: [2020-03-13 Fri 11:16]
+** TODO elfeed
+** pdf-tool*** 启动时自动加载模式
+
+* DONE counsel-recentf 显示时间
+  CLOSED: [2020-03-16 Mon 01:28]
+  ivy-rich
+* DONE counsel-fzf/ counsel-rg 显示路径
+  CLOSED: [2020-03-16 Mon 01:30]
+  counsel-fzf-with-prompt counsel-rg-with-prompt
+* DONE modeline
+  CLOSED: [2020-03-24 Tue 17:02]
+  | 文件编辑相关 | 中间空白 | 附属文件信息 | emacs 内容  |
+** 文件编辑相关
+*** 是否修改
+*** 名称
+*** 位置
+*** major mode
+*** flycheck 检查
+*** 空白
+*** Git 信息
+*** Emacs 自身信息
+** DONE anzu
+   CLOSED: [2020-03-21 Sat 21:06]
+** flycheck
+
+** fill
+* DONE emacs-rime
+  CLOSED: [2020-03-24 Tue 17:03]
+** rime english mode
+** rime chinese mode
+* DONE adjust some keybindings for company
+  CLOSED: [2020-03-24 Tue 17:20]
+  ("TAB" . company-complete-common)
+  ("M-n" . company-select-next)
+  ("M-p" . company-select-previous)
+  ("RET" . newline)
+  ("<return>" . newline))
+* DONE mini-modeline
+  CLOSED: [2020-04-09 Thu 00:10]
+* C/C++ mode
+* DONE M-m m 有关 buffer 的信息
+  CLOSED: [2020-04-09 Thu 10:01]
+** DONE M-m m f 当前文件位置
+   CLOSED: [2020-04-09 Thu 10:01]
+* DONE Dired mode Create new file <N>
+  CLOSED: [2020-04-09 Thu 10:02]

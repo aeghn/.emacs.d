@@ -1,0 +1,532 @@
+;;; stein-theme.el --- stein Theme
+
+;; Copyright 2015-present, All rights reserved
+;;
+;; Code licensed under the MIT license
+
+;; Credits:
+;; https://github.com/dracula/emacs
+
+;; author
+;; Aeghn
+
+
+;;; Code:
+(deftheme stein)
+
+;; Assigment form: VARIABLE COLOR [TTY-COLOR]
+(let ((colors '(
+                (stein-bg      "#282828")
+                (stein-current "#595959")
+                (stein-fg      "#D8D8D8")
+                (stein-comment "#868686")
+                (stein-cyan    "#66FFFF")
+                (stein-green   "#00DD44")
+                (stein-orange  "#FF9966")
+                (stein-magenta "#DD33CC")
+                (stein-purple  "#9944EE")
+                (stein-red     "#EE1111")
+                (stein-yellow  "#FFCC55")
+                (stein-blue    "#22AAFF")
+                ;; Other colors
+                (bg0            "#171717")
+                (bg2            "#393939")
+                (bg3            "#4A4A4A")
+                (fg0            "#CACACA")
+                (fg2            "#E6E6E6")
+                (fg3            "#F8F8F8")
+			))
+      (faces '(;; default
+               (cursor :background ,fg3)
+               (default :background ,stein-bg :foreground ,stein-fg)
+               (default-italic :slant italic)
+               (ffap :foreground ,fg0)
+               (fringe :background ,stein-bg :foreground ,fg0)
+               (highlight :foreground ,fg3 :background ,bg3)
+               (hl-line :background ,stein-current :extend t)
+               (info-quoted-name :foreground ,stein-blue)
+               (info-string :foreground ,stein-yellow)
+               (lazy-highlight :foreground ,fg2 :background ,bg3)
+               (link :foreground ,stein-cyan :underline t)
+               (linum :slant italic :foreground ,bg0 :background ,stein-bg)
+               (line-number :slant italic :foreground ,stein-comment :background ,stein-bg )
+               (minibuffer-prompt :weight bold :foreground ,stein-blue)
+               (region :background ,stein-yellow :foreground ,stein-bg :extend t)
+               (trailing-whitespace :foreground nil :background ,stein-blue)
+               (vertical-border :foreground ,bg2)
+               (success :foreground ,stein-green)
+               (warning :foreground ,stein-blue)
+               (error :foreground ,stein-red)
+               (header-line :background ,stein-bg)
+               ;; syntax
+               (font-lock-builtin-face :foreground ,stein-blue)
+               (font-lock-comment-face :foreground ,stein-comment)
+               (font-lock-comment-delimiter-face :foreground ,stein-comment)
+               (font-lock-constant-face :foreground ,stein-cyan)
+               (font-lock-doc-face :foreground ,stein-comment)
+               (font-lock-function-name-face :foreground ,stein-green :weight bold)
+               (font-lock-keyword-face :weight bold :foreground ,stein-magenta)
+               (font-lock-negation-char-face :foreground ,stein-cyan)
+               (font-lock-preprocessor-face :foreground ,stein-blue)
+               (font-lock-reference-face :foreground ,stein-cyan)
+               (font-lock-regexp-grouping-backslash :foreground ,stein-cyan)
+               (font-lock-regexp-grouping-construct :foreground ,stein-purple)
+               (font-lock-string-face :foreground ,stein-yellow)
+               (font-lock-type-face :foreground ,stein-purple)
+               (font-lock-variable-name-face :foreground ,stein-fg
+                                             :weight bold)
+               (font-lock-warning-face :foreground ,stein-blue :background ,bg2)
+               ;; auto-complete
+               (ac-completion-face :underline t :foreground ,stein-magenta)
+               ;; company
+               (company-echo-common :foreground ,stein-bg :background ,stein-fg)
+               (company-preview :background ,stein-bg :foreground ,stein-orange)
+               (company-preview-common :foreground ,bg2 :foreground ,fg3)
+               (company-preview-search :foreground ,stein-purple :background ,stein-bg)
+               (company-scrollbar-bg :background ,bg3)
+               (company-scrollbar-fg :foreground ,stein-magenta)
+               (company-template-field :inherit region)
+               (company-tooltip :foreground ,fg2 :background ,stein-bg :weight bold)
+               (company-tooltip-annotation :foreground ,stein-cyan)
+               (company-tooltip-common :foreground ,fg3)
+               (company-tooltip-common-selection :foreground ,stein-yellow)
+               (company-tooltip-mouse :inherit highlight)
+               (company-tooltip-selection :background ,bg3 :foreground ,fg3)
+               ;; diff-hl
+               (diff-hl-change :foreground ,stein-blue :background ,stein-blue)
+               (diff-hl-delete :foreground ,stein-red :background ,stein-red)
+               (diff-hl-insert :foreground ,stein-green :background ,stein-green)
+               ;; dired
+               (dired-directory :foreground ,stein-green :weight normal)
+               (dired-flagged :foreground ,stein-magenta)
+               (dired-header :foreground ,fg3 :background ,stein-bg)
+               (dired-ignored :inherit shadow)
+               (dired-mark :foreground ,stein-fg :weight bold)
+               (dired-marked :foreground ,stein-blue :weight bold)
+               (dired-perm-write :foreground ,fg3 :underline t)
+               (dired-symlink :foreground ,stein-yellow :weight normal :slant italic)
+               (dired-warning :foreground ,stein-blue :underline t)
+               (diredp-compressed-file-name :foreground ,fg3)
+               (diredp-compressed-file-suffix :foreground ,fg0)
+               (diredp-date-time :foreground ,stein-fg)
+               (diredp-deletion-file-name :foreground ,stein-magenta :background ,stein-current)
+               (diredp-deletion :foreground ,stein-magenta :weight bold)
+               (diredp-dir-heading :foreground ,fg2 :background ,bg0)
+               (diredp-dir-name :inherit dired-directory)
+               (diredp-dir-priv :inherit dired-directory)
+               (diredp-executable-tag :foreground ,stein-blue)
+               (diredp-file-name :foreground ,stein-fg)
+               (diredp-file-suffix :foreground ,fg0)
+               (diredp-flag-mark-line :foreground ,fg2 :slant italic :background ,stein-current)
+               (diredp-flag-mark :foreground ,fg2 :weight bold :background ,stein-current)
+               (diredp-ignored-file-name :foreground ,stein-fg)
+               (diredp-mode-line-flagged :foreground ,stein-blue)
+               (diredp-mode-line-marked :foreground ,stein-blue)
+               (diredp-no-priv :foreground ,stein-fg)
+               (diredp-number :foreground ,stein-cyan)
+               (diredp-other-priv :foreground ,stein-blue)
+               (diredp-rare-priv :foreground ,stein-blue)
+               (diredp-read-priv :foreground ,stein-purple)
+               (diredp-write-priv :foreground ,stein-magenta)
+               (diredp-exec-priv :foreground ,stein-yellow)
+               (diredp-symlink :foreground ,stein-blue)
+               (diredp-link-priv :foreground ,stein-blue)
+               (diredp-autofile-name :foreground ,stein-yellow)
+               (diredp-tagged-autofile-name :foreground ,stein-yellow)
+               ;; enh-ruby
+               (enh-ruby-heredoc-delimiter-face :foreground ,stein-yellow)
+               (enh-ruby-op-face :foreground ,stein-magenta)
+               (enh-ruby-regexp-delimiter-face :foreground ,stein-yellow)
+               (enh-ruby-string-delimiter-face :foreground ,stein-yellow)
+               ;; font-latex
+               (font-latex-bold-face :foreground ,stein-purple)
+               (font-latex-italic-face :foreground ,stein-magenta :slant italic)
+               (font-latex-match-reference-keywords :foreground ,stein-cyan)
+               (font-latex-match-variable-keywords :foreground ,stein-fg)
+               (font-latex-string-face :foreground ,stein-yellow)
+               ;; gnus-group
+               (gnus-group-mail-1 :foreground ,stein-magenta :weight bold)
+               (gnus-group-mail-1-empty :inherit gnus-group-mail-1 :weight normal)
+               (gnus-group-mail-2 :foreground ,stein-cyan :weight bold)
+               (gnus-group-mail-2-empty :inherit gnus-group-mail-2 :weight normal)
+               (gnus-group-mail-3 :foreground ,stein-comment :weight bold)
+               (gnus-group-mail-3-empty :inherit gnus-group-mail-3 :weight normal)
+               (gnus-group-mail-low :foreground ,stein-current :weight bold)
+               (gnus-group-mail-low-empty :inherit gnus-group-mail-low :weight normal)
+               (gnus-group-news-1 :foreground ,stein-magenta :weight bold)
+               (gnus-group-news-1-empty :inherit gnus-group-news-1 :weight normal)
+               (gnus-group-news-2 :foreground ,stein-cyan :weight bold)
+               (gnus-group-news-2-empty :inherit gnus-group-news-2 :weight normal)
+               (gnus-group-news-3 :foreground ,stein-comment :weight bold)
+               (gnus-group-news-3-empty :inherit gnus-group-news-3 :weight normal)
+               (gnus-group-news-4 :inherit gnus-group-news-low)
+               (gnus-group-news-4-empty :inherit gnus-group-news-low-empty)
+               (gnus-group-news-5 :inherit gnus-group-news-low)
+               (gnus-group-news-5-empty :inherit gnus-group-news-low-empty)
+               (gnus-group-news-6 :inherit gnus-group-news-low)
+               (gnus-group-news-6-empty :inherit gnus-group-news-low-empty)
+               (gnus-group-news-low :foreground ,stein-current :weight bold)
+               (gnus-group-news-low-empty :inherit gnus-group-news-low :weight normal)
+               (gnus-header-content :foreground ,stein-magenta)
+               (gnus-header-from :foreground ,stein-fg)
+               (gnus-header-name :foreground ,stein-purple)
+               (gnus-header-subject :foreground ,stein-green :weight bold)
+               (gnus-summary-markup-face :foreground ,stein-cyan)
+               (gnus-summary-high-unread :foreground ,stein-magenta :weight bold)
+               (gnus-summary-high-read :inherit gnus-summary-high-unread :weight normal)
+               (gnus-summary-high-ancient :inherit gnus-summary-high-read)
+               (gnus-summary-high-ticked :inherit gnus-summary-high-read :underline t)
+               (gnus-summary-normal-unread :foreground ,stein-orange :weight bold)
+               (gnus-summary-normal-read :inherit gnus-summary-normal-unread :weight normal)
+               (gnus-summary-normal-ancient :inherit gnus-summary-normal-read)
+               (gnus-summary-normal-ticked :inherit gnus-summary-normal-read :underline t)
+               (gnus-summary-low-unread :foreground ,stein-comment :weight bold)
+               (gnus-summary-low-read :inherit gnus-summary-low-unread :weight normal)
+               (gnus-summary-low-ancient :inherit gnus-summary-low-read)
+               (gnus-summary-low-ticked :inherit gnus-summary-low-read :underline t)
+               (gnus-summary-selected :inverse-video t)
+               ;; haskell-mode
+               (haskell-operator-face :foreground ,stein-magenta)
+               (haskell-constructor-face :foreground ,stein-purple)
+               ;; helm
+               (helm-bookmark-w3m :foreground ,stein-purple)
+               (helm-buffer-not-saved :foreground ,stein-purple :background ,stein-bg)
+               (helm-buffer-process :foreground ,stein-blue :background ,stein-bg)
+               (helm-buffer-saved-out :foreground ,stein-fg :background ,stein-bg)
+               (helm-buffer-size :foreground ,stein-fg :background ,stein-bg)
+               (helm-candidate-number :foreground ,stein-bg :background ,stein-fg)
+               (helm-ff-directory :foreground ,stein-green :background ,stein-bg :weight bold)
+               (helm-ff-executable :foreground ,stein-orange :background ,stein-bg :weight normal)
+               (helm-ff-file :foreground ,stein-fg :background ,stein-bg :weight normal)
+               (helm-ff-invalid-symlink :foreground ,stein-magenta :background ,stein-bg :weight bold)
+               (helm-ff-prefix :foreground ,stein-bg :background ,stein-magenta :weight normal)
+               (helm-ff-symlink :foreground ,stein-magenta :background ,stein-bg :weight bold)
+               (helm-grep-cmd-line :foreground ,stein-fg :background ,stein-bg)
+               (helm-grep-file :foreground ,stein-fg :background ,stein-bg)
+               (helm-grep-finish :foreground ,fg2 :background ,stein-bg)
+               (helm-grep-lineno :foreground ,stein-fg :background ,stein-bg)
+               (helm-grep-match :foreground nil :background nil :inherit helm-match)
+               (helm-grep-running :foreground ,stein-green :background ,stein-bg)
+               (helm-header :foreground ,fg2 :background ,stein-bg :underline nil :box nil)
+               (helm-moccur-buffer :foreground ,stein-green :background ,stein-bg)
+               (helm-selection :background ,bg2 :underline nil)
+               (helm-selection-line :background ,bg2)
+               (helm-separator :foreground ,stein-purple :background ,stein-bg)
+               (helm-source-go-package-godoc-description :foreground ,stein-yellow)
+               (helm-source-header :foreground ,stein-magenta :background ,stein-bg :underline nil :weight bold)
+               (helm-time-zone-current :foreground ,stein-blue :background ,stein-bg)
+               (helm-time-zone-home :foreground ,stein-purple :background ,stein-bg)
+               (helm-visible-mark :foreground ,stein-bg :background ,bg3)
+               ;; highlight-indentation minor mode
+               (highlight-indentation-face :background ,bg2)
+               ;; icicle
+               (icicle-whitespace-highlight :background ,stein-fg)
+               (icicle-special-candidate :foreground ,fg2)
+               (icicle-extra-candidate :foreground ,fg2)
+               (icicle-search-main-regexp-others :foreground ,stein-fg)
+               (icicle-search-current-input :foreground ,stein-magenta)
+               (icicle-search-context-level-8 :foreground ,stein-blue)
+               (icicle-search-context-level-7 :foreground ,stein-blue)
+               (icicle-search-context-level-6 :foreground ,stein-blue)
+               (icicle-search-context-level-5 :foreground ,stein-blue)
+               (icicle-search-context-level-4 :foreground ,stein-blue)
+               (icicle-search-context-level-3 :foreground ,stein-blue)
+               (icicle-search-context-level-2 :foreground ,stein-blue)
+               (icicle-search-context-level-1 :foreground ,stein-blue)
+               (icicle-search-main-regexp-current :foreground ,stein-fg)
+               (icicle-saved-candidate :foreground ,stein-fg)
+               (icicle-proxy-candidate :foreground ,stein-fg)
+               (icicle-mustmatch-completion :foreground ,stein-purple)
+               (icicle-multi-command-completion :foreground ,fg2 :background ,bg2)
+               (icicle-msg-emphasis :foreground ,stein-green)
+               (icicle-mode-line-help :foreground ,fg0)
+               (icicle-match-highlight-minibuffer :foreground ,stein-blue)
+               (icicle-match-highlight-Completions :foreground ,stein-green)
+               (icicle-key-complete-menu-local :foreground ,stein-fg)
+               (icicle-key-complete-menu :foreground ,stein-fg)
+               (icicle-input-completion-fail-lax :foreground ,stein-magenta)
+               (icicle-input-completion-fail :foreground ,stein-magenta)
+               (icicle-historical-candidate-other :foreground ,stein-fg)
+               (icicle-historical-candidate :foreground ,stein-fg)
+               (icicle-current-candidate-highlight :foreground ,stein-blue :background ,bg3)
+               (icicle-Completions-instruction-2 :foreground ,fg0)
+               (icicle-Completions-instruction-1 :foreground ,fg0)
+               (icicle-completion :foreground ,stein-fg)
+               (icicle-complete-input :foreground ,stein-blue)
+               (icicle-common-match-highlight-Completions :foreground ,stein-purple)
+               (icicle-candidate-part :foreground ,stein-fg)
+               (icicle-annotation :foreground ,fg0)
+               ;; icomplete
+               (icompletep-determined :foreground ,stein-blue)
+               ;; ido
+               (ido-first-match :foreground ,stein-magenta :weight bold)
+               (ido-only-match :foreground ,stein-blue)
+               (ido-subdir :foreground ,stein-blue)
+               (ido-virtual :foreground ,stein-cyan)
+               (ido-incomplete-regexp :inherit font-lock-warning-face)
+               (ido-indicator :foreground ,stein-fg :background ,stein-magenta)
+               ;; isearch
+               (isearch :weight bold :foreground ,stein-blue :background ,bg3)
+               (isearch-fail :foreground ,stein-bg :background ,stein-blue)
+               ;; jde-java
+               (jde-java-font-lock-constant-face :foreground ,stein-cyan)
+               (jde-java-font-lock-modifier-face :foreground ,stein-magenta)
+               (jde-java-font-lock-number-face :foreground ,stein-fg)
+               (jde-java-font-lock-package-face :foreground ,stein-fg)
+               (jde-java-font-lock-private-face :foreground ,stein-magenta)
+               (jde-java-font-lock-public-face :foreground ,stein-magenta)
+               ;; js2-mode
+               (js2-external-variable :foreground ,stein-purple)
+               (js2-function-param :foreground ,stein-cyan)
+               (js2-jsdoc-html-tag-delimiter :foreground ,stein-yellow)
+               (js2-jsdoc-html-tag-name :foreground ,stein-orange)
+               (js2-jsdoc-value :foreground ,stein-yellow)
+               (js2-private-function-call :foreground ,stein-cyan)
+               (js2-private-member :foreground ,fg3)
+               ;; js3-mode
+               (js3-error-face :underline ,stein-blue)
+               (js3-external-variable-face :foreground ,stein-fg)
+               (js3-function-param-face :foreground ,stein-magenta)
+               (js3-instance-member-face :foreground ,stein-cyan)
+               (js3-jsdoc-tag-face :foreground ,stein-magenta)
+               (js3-warning-face :underline ,stein-magenta)
+               ;; magit
+               (magit-branch-local :foreground ,stein-cyan)
+               (magit-branch-remote :foreground ,stein-green)
+               (magit-tag :foreground ,stein-blue)
+               (magit-section-heading :foreground ,stein-magenta :weight bold)
+               (magit-section-highlight :background ,bg3 :extend t)
+               (magit-diff-context-highlight :background ,bg3
+                                             :foreground ,fg3
+                                             :extend t)
+               (magit-diff-revision-summary :foreground ,stein-blue
+                                            :background ,stein-bg
+                                            :weight bold)
+               (magit-diff-revision-summary-highlight :foreground ,stein-blue
+                                                      :background ,bg3
+                                                      :weight bold
+                                                      :extend t)
+               ;; the four following lines are just a patch of the
+               ;; upstream color to add the extend keyword.
+               (magit-diff-added :background "#335533"
+                                 :foreground "#ddffdd"
+                                 :extend t)
+               (magit-diff-added-highlight :background "#336633"
+                                           :foreground "#cceecc"
+                                           :extend t)
+               (magit-diff-removed :background "#553333"
+                                   :foreground "#ffdddd"
+                                   :extend t)
+               (magit-diff-removed-highlight :background "#663333"
+                                             :foreground "#eecccc"
+                                             :extend t)
+               (magit-diff-file-heading :foreground ,stein-fg)
+               (magit-diff-file-heading-highlight :inherit magit-section-highlight)
+               (magit-diffstat-added :foreground ,stein-green)
+               (magit-diffstat-removed :foreground ,stein-red)
+               (magit-hash :foreground ,fg2)
+               (magit-hunk-heading :background ,bg3)
+               (magit-hunk-heading-highlight :background ,bg3)
+               (magit-item-highlight :background ,bg3)
+               (magit-log-author :foreground ,fg3)
+               (magit-process-ng :foreground ,stein-blue :weight bold)
+               (magit-process-ok :foreground ,stein-green :weight bold)
+               ;; message
+               (message-mml :foreground ,stein-green :weight normal)
+               (message-header-xheader :foreground ,stein-cyan :weight normal)
+               ;; mode-line
+               (mode-line :foreground nil :background ,bg2 :box ,bg3)
+               (mode-line-inactive :foreground ,stein-fg :background ,stein-bg :box ,stein-bg)
+               ;; mu4e
+               (mu4e-unread-face :foreground ,stein-magenta :weight normal)
+               (mu4e-view-url-number-face :foreground ,stein-purple)
+               (mu4e-highlight-face :background ,stein-bg
+                                    :foreground ,stein-yellow
+                                    :extend t)
+               (mu4e-header-highlight-face :background ,stein-current
+                                           :foreground ,stein-fg
+                                           :underline nil :weight bold
+                                           :extend t)
+               (mu4e-header-key-face :inherit message-mml)
+               (mu4e-header-marks-face :foreground ,stein-purple)
+               (mu4e-cited-1-face :foreground ,stein-purple)
+               (mu4e-cited-2-face :foreground ,stein-blue)
+               (mu4e-cited-3-face :foreground ,stein-comment)
+               (mu4e-cited-4-face :foreground ,fg2)
+               (mu4e-cited-5-face :foreground ,fg3)
+               ;; org
+               (org-agenda-date :foreground ,stein-cyan :underline nil)
+               (org-agenda-dimmed-todo-face :foreground ,stein-comment)
+               (org-agenda-done :foreground ,stein-green)
+               (org-agenda-structure :foreground ,stein-purple)
+               (org-block :foreground ,stein-blue)
+               (org-code :foreground ,stein-yellow)
+               (org-column :background ,bg0)
+               (org-column-title :inherit org-column :weight bold :underline t)
+               (org-date :foreground ,stein-cyan :underline t)
+               (org-document-info :foreground ,stein-orange)
+               (org-document-info-keyword :foreground ,stein-comment)
+               (org-document-title :weight bold :foreground ,stein-blue :height 1.44)
+               (org-done :foreground ,stein-comment :weight normal :strike-through t)
+               (org-ellipsis :foreground ,stein-comment)
+               (org-footnote :foreground ,stein-orange)
+               (org-formula :foreground ,stein-magenta)
+               (org-headline-done :foreground ,stein-comment :weight normal :strike-through t)
+               (org-hide :foreground ,stein-bg :background ,stein-bg)
+               (org-level-1 :inherit bold :foreground ,stein-magenta )
+               (org-level-2 :inherit bold :foreground ,stein-purple )
+               (org-level-3 :weight normal :foreground ,stein-green )
+               (org-level-4 :weight normal :foreground ,stein-yellow)
+               (org-level-5 :weight normal :foreground ,stein-cyan)
+               (org-level-6 :weight normal :foreground ,stein-blue)
+               (org-level-7 :weight normal :foreground ,stein-orange)
+               (org-level-8 :weight normal :foreground ,stein-fg)
+               (org-link :foreground ,stein-cyan :underline t)
+               (org-priority :foreground ,stein-cyan)
+               (org-scheduled :foreground ,stein-green)
+               (org-scheduled-previously :foreground ,stein-yellow)
+               (org-scheduled-today :foreground ,stein-green)
+               (org-sexp-date :foreground ,fg0)
+               (org-special-keyword :foreground ,stein-yellow)
+               (org-table :foreground ,stein-purple)
+               (org-tag :foreground ,stein-magenta :weight bold :background ,bg2)
+               (org-upcoming-deadline :foreground ,stein-yellow)
+               (org-warning :weight bold :foreground ,stein-magenta)
+
+              
+               ;; outline
+               (outline-1 :foreground ,stein-green)
+               (outline-2 :foreground ,stein-purple)
+               (outline-3 :foreground ,stein-cyan)
+               (outline-4 :foreground ,stein-yellow)
+               (outline-5 :foreground ,stein-blue)
+               (outline-6 :foreground ,stein-orange)
+               ;; powerline
+               (powerline-evil-base-face :foreground ,bg2)
+               (powerline-evil-emacs-face :inherit powerline-evil-base-face :background ,stein-yellow)
+               (powerline-evil-insert-face :inherit powerline-evil-base-face :background ,stein-cyan)
+               (powerline-evil-motion-face :inherit powerline-evil-base-face :background ,stein-purple)
+               (powerline-evil-normal-face :inherit powerline-evil-base-face :background ,stein-green)
+               (powerline-evil-operator-face :inherit powerline-evil-base-face :background ,stein-magenta)
+               (powerline-evil-replace-face :inherit powerline-evil-base-face :background ,stein-red)
+               (powerline-evil-visual-face :inherit powerline-evil-base-face :background ,stein-blue)
+               ;; rainbow-delimiters
+               (rainbow-delimiters-depth-1-face :foreground ,stein-fg)
+               (rainbow-delimiters-depth-2-face :foreground ,stein-cyan)
+               (rainbow-delimiters-depth-3-face :foreground ,stein-purple)
+               (rainbow-delimiters-depth-4-face :foreground ,stein-magenta)
+               (rainbow-delimiters-depth-5-face :foreground ,stein-blue)
+               (rainbow-delimiters-depth-6-face :foreground ,stein-green)
+               (rainbow-delimiters-depth-7-face :foreground ,stein-yellow)
+               (rainbow-delimiters-depth-8-face :foreground ,stein-orange)
+               (rainbow-delimiters-unmatched-face :foreground ,stein-blue)
+               ;; rpm-spec
+               (rpm-spec-dir-face :foreground ,stein-green)
+               (rpm-spec-doc-face :foreground ,stein-magenta)
+               (rpm-spec-ghost-face :foreground ,stein-purple)
+               (rpm-spec-macro-face :foreground ,stein-yellow)
+               (rpm-spec-obsolete-tag-face :inherit font-lock-warning-face)
+               (rpm-spec-package-face :foreground ,stein-purple)
+               (rpm-spec-section-face :foreground ,stein-yellow)
+               (rpm-spec-tag-face :foreground ,stein-cyan)
+               (rpm-spec-var-face :foreground ,stein-blue)
+               ;; show-paren
+               (show-paren-match-face :background unspecified
+                                      :foreground ,stein-cyan
+                                      :weight bold)
+               (show-paren-match :background unspecified
+                                 :foreground ,stein-cyan
+                                 :weight bold)
+               (show-paren-match-expression :inherit region)
+               (show-paren-mismatch :inherit font-lock-warning-face)
+               ;; slime
+               (slime-repl-inputed-output-face :foreground ,stein-purple)
+               ;; spam
+               (spam :inherit gnus-summary-normal-read :foreground ,stein-blue
+                     :strike-through t :slant oblique)
+               ;; tab-bar & tab-line (since Emacs 27.1)
+               (tab-bar :foreground ,stein-magenta :background ,bg2
+                        :inherit variable-pitch)
+               (tab-bar-tab :background ,stein-current :inherit tab-bar)
+               (tab-bar-tab-inactive :foreground ,stein-purple :background ,bg3
+                                     :inherit tab-bar-tab)
+               (tab-line :height 0.9 :foreground ,stein-magenta
+                         :background ,bg2 :inherit variable-pitch)
+               (tab-line-tab :background ,stein-current :inherit tab-line)
+               (tab-line-tab-inactive :foreground ,stein-purple :background ,bg3
+                                      :inherit tab-line-tab)
+               ;; term
+               (term :foreground ,stein-fg :background ,stein-bg)
+               (term-color-black :foreground ,stein-bg :background ,stein-bg)
+               (term-color-blue :foreground ,stein-purple :background ,stein-purple)
+               (term-color-cyan :foreground ,stein-cyan :background ,stein-cyan)
+               (term-color-green :foreground ,stein-green :background ,stein-green)
+               (term-color-magenta :foreground ,stein-magenta :background ,stein-magenta)
+               (term-color-red :foreground ,stein-red :background ,stein-red)
+               (term-color-white :foreground ,stein-fg :background ,stein-fg)
+               (term-color-yellow :foreground ,stein-yellow :background ,stein-yellow)
+               ;; undo-tree
+               (undo-tree-visualizer-current-face :foreground ,stein-blue)
+               (undo-tree-visualizer-default-face :foreground ,fg2)
+               (undo-tree-visualizer-register-face :foreground ,stein-purple)
+               (undo-tree-visualizer-unmodified-face :foreground ,stein-fg)
+               ;; web-mode
+               (web-mode-builtin-face :inherit ,font-lock-builtin-face)
+               (web-mode-comment-face :inherit ,font-lock-comment-face)
+               (web-mode-constant-face :inherit ,font-lock-constant-face)
+               (web-mode-doctype-face :inherit ,font-lock-comment-face)
+               (web-mode-function-name-face :inherit ,font-lock-function-name-face)
+               (web-mode-html-attr-name-face :foreground ,stein-purple)
+               (web-mode-html-attr-value-face :foreground ,stein-green)
+               (web-mode-html-tag-face :foreground ,stein-magenta :weight bold)
+               (web-mode-keyword-face :foreground ,stein-magenta)
+               (web-mode-string-face :foreground ,stein-yellow)
+               (web-mode-type-face :inherit ,font-lock-type-face)
+               (web-mode-warning-face :inherit ,font-lock-warning-face)
+               ;; which-func
+               (which-func :inherit ,font-lock-function-name-face)
+               ;; whitespace
+               (whitespace-big-indent :background ,stein-red :foreground ,stein-red)
+               (whitespace-empty :background ,stein-blue :foreground ,stein-red)
+               (whitespace-hspace :background ,bg3 :foreground ,stein-comment)
+               (whitespace-indentation :background ,stein-blue :foreground ,stein-red)
+               (whitespace-line :background ,stein-bg :foreground ,stein-magenta)
+               (whitespace-newline :foreground ,stein-comment)
+               (whitespace-space :background ,stein-bg :foreground ,stein-comment)
+               (whitespace-space-after-tab :background ,stein-blue :foreground ,stein-red)
+               (whitespace-space-before-tab :background ,stein-blue :foreground ,stein-red)
+               (whitespace-tab :background ,bg2 :foreground ,stein-comment)
+               (whitespace-trailing :inherit trailing-whitespace)
+               ;; yard-mode
+               (yard-tag-face :inherit ,font-lock-builtin-face)
+               (yard-directive-face :inherit ,font-lock-builtin-face))))
+
+  (apply #'custom-theme-set-faces
+         'stein
+         (let ((color-names (mapcar #'car colors))
+               (graphic-colors (mapcar #'cadr colors))
+               (tty-colors (mapcar #'car (mapcar #'last colors))))
+           (cl-flet* ((expand-for-tty (spec) (cl-progv color-names tty-colors
+                                               (eval `(backquote ,spec))))
+                      (expand-for-graphic (spec) (cl-progv color-names graphic-colors
+                                                   (eval `(backquote ,spec)))))
+             (cl-loop for (face . spec) in faces
+                      collect `(,face
+                                ((((min-colors 16777216))
+                                  ,(expand-for-graphic spec))
+                                 (t
+                                  ,(expand-for-tty spec)))))))))
+
+;;;###autoload
+(when load-file-name
+  (add-to-list 'custom-theme-load-path
+               (file-name-as-directory (file-name-directory load-file-name))))
+
+(provide-theme 'stein)
+
+;; Local Variables:
+;; no-byte-compile: t
+;; indent-tabs-mode: nil
+;; End:
+
+;;; stein-theme.el ends here
