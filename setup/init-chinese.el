@@ -63,6 +63,7 @@
         '("C-f" "C-b" "C-n" "C-p" "C-g"))
   (setq default-input-method "rime"
         rime-show-candidate 'posframe)
+  (defvar rime-input-mode nil)
 
   ;; Use English if return t,
   ;; use Chinese if return nil.
@@ -78,6 +79,7 @@ Space followed by English."
 Chinese followed by Chinese.
 English followed by English.
 Space followed by English."
+    (activate-input-method "rime")
     (if (> (point) (save-excursion (back-to-indentation) (point)))
         (if (looking-back " +" 1)
             (looking-back "\\cc +" 2)
@@ -88,10 +90,13 @@ Space followed by English."
     (if (member 'rime-chinese-mode rime-disable-predicates)
         (progn (setq rime-disable-predicates
                      '(rime-english-mode))
-               (message "English mode rime "))
+               (setq rime-input-mode "English"))
       (progn (setq rime-disable-predicates
                    '(rime-chinese-mode))
-             (message "Chinese mode rime"))))
+             (setq rime-input-mode "Chinese")))
+    (if (string= current-input-method "rime")
+        (message "Current input method is %s and mode is %s" current-input-method rime-input-mode)
+      (activate-input-method 'rime)))
 
   (setq rime-disable-predicates
         '(rime-english-mode)))

@@ -70,7 +70,6 @@
 (bind-key "C-c h" 'help-command)
 (bind-key "M-h" 'backward-kill-word)
 (bind-key "C-c r" 'chin/revert-buffer)
-(bind-key "C-z" 'undo-tree)
 (bind-key "C-;" 'comment-dwim-2)
 (global-set-key (kbd "<f2>") (lambda() (interactive)(find-file "~/.emacs.d/timeline.org")))
 
@@ -80,3 +79,6 @@
 
 ;;; init-default.el ends here
 (provide 'init-basic)
+
+
+789

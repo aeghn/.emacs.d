@@ -60,6 +60,10 @@
          ("M-+" . hs-show-all))
   :hook (prog-mode . hs-minor-mode))
 
+(use-package diff-hl
+  :config
+  (global-diff-hl-mode))
+
 (use-package avy
   :bind (("C-:" . avy-goto-char)
          ;; ("C-" . avy-goto-char-2)

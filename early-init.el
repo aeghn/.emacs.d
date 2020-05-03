@@ -1,4 +1,7 @@
 ;; Defer garbage collection further back in the startup process
+
+(setq-default comp-deferred-compilation 1)
+
 (setq gc-cons-threshold most-positive-fixnum)
 
 ;; Package initialize occurs automatically, before `user-init-file' is

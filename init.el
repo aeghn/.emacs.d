@@ -25,6 +25,10 @@
 (require 'cl-lib)
 (require 'init-basic)
 
+
+(require 'benchmark-init)
+;; To disable collection of benchmark data after init is done.
+(add-hook 'after-init-hook 'benchmark-init/deactivate)
 ;; Choose different load mode
 (defvar chin/emacs-load-mode (getenv "_EMACS_LOAD_MODE_"))
 (cond ((not chin/emacs-load-mode)
@@ -41,12 +45,13 @@
          (require 'init-reader)
          (require 'init-network)
          (require 'init-ui)
-         (require 'init-c)
+         (require 'init-cc)
          (require 'init-dired)
          (require 'init-modeline)
          ))
       ((string-equal "chinbox" chin/emacs-load-mode)
        (progn
          (require 'init-org)
+         (require 'init-ivy)
          (require 'init-chinese)
          (require 'init-chinbox))))

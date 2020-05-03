@@ -57,14 +57,6 @@ vi style of % jumping to matching brace."
          ("f" . helpful-callable)
          ("v" . helpful-variable))))
 
-(use-package undo-tree
-  :diminish
-  :hook (after-init . global-undo-tree-mode)
-  :init
-  (setq undo-tree-visualizer-timestamps t
-        undo-tree-enable-undo-in-region nil
-        undo-tree-auto-save-history nil))
-
 (use-package keyfreq
   :config
   (keyfreq-mode 1)

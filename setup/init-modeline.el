@@ -24,7 +24,9 @@
   (setq mini-modeline-r-format
         '(("%e"
            (:eval (buffer-status))
-           "  %b  "
+           " "
+           mode-line-directory
+           "%b  "
            "%2l:%2C:%p "
            "  "
            (flycheck-mode flycheck-mode-line)
@@ -34,11 +36,27 @@
            (vc-mode vc-mode)
            mode-line-end-space)))
   (setq mini-modeline-enhance-visual nil
-        mini-modeline-echo-duration 2)
-  (add-hook 'after-make-frame-functions (lambda (frame)
-                                          (select-frame frame)
-                                        (mini-modeline-mode t))
-                                    ))
+        mini-modeline-echo-duration 30)
+  ;; (add-hook 'server-after-make-frame-hook (lambda ()
+  ;; (mini-modeline-mode t)))
+  (mini-modeline-mode t)
+  :config
+  ;; Thanks to DogLooksGood
+  (setq-default
+   ;; Window divider setup
+   window-divider-default-right-width 1
+   window-divider-default-bottom-width 1
+   window-divider-default-places t)
+  ;; https://github.com/DogLooksGood/dogEmacs/blob/master/elisp/init-look-and-feel.el#L66
+  (defun chin/toggle-window-divider-and-border ()
+    (unless (string-match-p ".*-posframe\\*" (buffer-name (current-buffer)))
+      (if (> (count-windows) 1)
+          (progn
+            (window-divider-mode 1))
+        (progn
+          (window-divider-mode -1)))))
+
+  (add-hook 'window-configuration-change-hook #'chin/toggle-window-divider-and-border))
 
 (global-set-key (kbd "M-m m f") (lambda ()
                                   (interactive)
@@ -76,7 +94,7 @@ directory too."
 
 (defvar mode-line-directory
   '(:propertize
-    (:eval (if (buffer-file-name) (concat "  " (shrink-path--dirs-internal default-directory 15)))))
+    (:eval (if (buffer-file-name) (concat "  " (shrink-path--dirs-internal default-directory 30)))))
   "Formats the current directory.")
 (put 'mode-line-directory 'risky-local-variable t)
 
@@ -85,7 +103,6 @@ directory too."
     (:eval (if (buffer-file-name) default-directory))))
 (put 'chin/frame-dir 'risky-local-variable t)
 
-
-(setq-default frame-title-format '("%e" (:eval (buffer-status)) " " chin/frame-dir "%b" " - emacs"))
+(setq-default frame-title-format '("%e" chin/frame-dir "%b" " - emacs"))
 
 (provide 'init-modeline)

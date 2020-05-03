@@ -17,19 +17,25 @@
 ;;(setq org-hide-emphasis-markers t)
 
 ;; org-bullets
-(use-package org-bullets
-  :config
-  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+;; (use-package org-bullets
+;;   :config
+;;   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 
-;; use org-bullets-mode for utf8 symbols as org bullets
-(require 'org-bullets)
-(setq org-bullets-face-name (quote org-bullet-face))
-(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
-(setq org-bullets-bullet-list '("◉" "◎" "☉" "○"))
+;; ;; use org-bullets-mode for utf8 symbols as org bullets
+;; (require 'org-bullets)
+;; (setq org-bullets-face-name (quote org-bullet-face))
+;; (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+;; (setq org-bullets-bullet-list '("◉" "◎" "☉" "○"))
 ;;  "◉"  "▣" "◈" "◬"
 ;;"㊎" "㊍" "㊌" "㊋" "㊏"
 ;; org ellipsis options, other than the default Go to Node.
 ;; not supported in common font, but supported in Symbola (my fall-back font) ⬎,     ⤷, ⤵
+(use-package org-superstar
+  :config
+  (setq org-superstar-headline-bullets-list '("◉" "◎" "☉" "○")
+        )
+  (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1))))
+
 (setq org-ellipsis " ...")
 
 ;; make available "org-bullet-face" such that I can control the font size individually
@@ -37,6 +43,7 @@
 (setq inhibit-compacting-font-caches t)
 (setq org-log-done 'time)
 (setq org-hide-emphasis-markers nil)
+(setq org-src-tab-acts-natively t)
 
 ;;(add-hook 'org-mode-hook 'visual-line-mode)
 

@@ -4,11 +4,13 @@
 
 ;;; Code:
 (use-package yasnippet
-  :commands (yas-reload-all)
+  :diminish yas-minor-mode
   :init
-  (setq yas-snippet-dirs `(,(expand-file-name "snippets" chin/library-files-directory)))
-  (setq yas-wrap-around-region t)
-  )
+  (add-to-list 'yas-snippet-dirs (expand-file-name "snippets" chin/library-files-directory))
+  :hook (after-init . yas-global-mode))
+
+(use-package yasnippet-snippets
+  :after yasnippet)
 
 (use-package company
   :defer 2
