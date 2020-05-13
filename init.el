@@ -1,5 +1,7 @@
 (prefer-coding-system 'utf-8)
 
+(setq comp-deferred-compilation t)
+
 (defvar user-emacs-directory (file-truename "~/.emacs.d/"))
 
 (defvar chin/configuration-files-directory (expand-file-name "setup" user-emacs-directory)
@@ -25,6 +27,9 @@
 (require 'cl-lib)
 (require 'init-basic)
 
+;; (require 'exwm)
+;; (require 'exwm-config)
+;; (exwm-config-default)
 
 (require 'benchmark-init)
 ;; To disable collection of benchmark data after init is done.

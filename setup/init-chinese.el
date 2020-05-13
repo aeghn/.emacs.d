@@ -62,9 +62,10 @@
   (setq rime-translate-keybindings
         '("C-f" "C-b" "C-n" "C-p" "C-g"))
   (setq default-input-method "rime"
-        rime-show-candidate 'posframe)
+        rime-show-candidate 'posframe
+        rime-show-preedit 'inline)
   (defvar rime-input-mode nil)
-
+  
   ;; Use English if return t,
   ;; use Chinese if return nil.
   (defun rime-english-mode ()

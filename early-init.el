@@ -1,6 +1,7 @@
-;; Defer garbage collection further back in the startup process
+(setq comp-deferred-compilation t
+      comp-async-jobs-number 5)
 
-(setq-default comp-deferred-compilation 1)
+;; Defer garbage collection further back in the startup process
 
 (setq gc-cons-threshold most-positive-fixnum)
 

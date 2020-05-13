@@ -36,7 +36,8 @@
            (vc-mode vc-mode)
            mode-line-end-space)))
   (setq mini-modeline-enhance-visual nil
-        mini-modeline-echo-duration 30)
+        mini-modeline-echo-duration 2
+        mode-line-format nil)
   ;; (add-hook 'server-after-make-frame-hook (lambda ()
   ;; (mini-modeline-mode t)))
   (mini-modeline-mode t)
@@ -62,6 +63,11 @@
                                   (interactive)
                                   (message "Current file is: %s" buffer-file-name)
                                   ))
+(global-set-key (kbd "M-m n") (lambda ()
+                                  (interactive)
+                                  (view-echo-area-messages)
+                                  (select-window "*Messages*")))
+
 ;;; Frame title format
 
 ;; buffer directory
@@ -103,6 +109,6 @@ directory too."
     (:eval (if (buffer-file-name) default-directory))))
 (put 'chin/frame-dir 'risky-local-variable t)
 
-(setq-default frame-title-format '("%e" chin/frame-dir "%b" " - emacs"))
+(setq-default frame-title-format '("%e" "%b" " - emacs"))
 
 (provide 'init-modeline)

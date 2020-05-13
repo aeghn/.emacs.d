@@ -40,7 +40,6 @@
 
 ;; make available "org-bullet-face" such that I can control the font size individually
 (setq org-bullets-face-name (quote org-bullet-face))
-(setq inhibit-compacting-font-caches t)
 (setq org-log-done 'time)
 (setq org-hide-emphasis-markers nil)
 (setq org-src-tab-acts-natively t)

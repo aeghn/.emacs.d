@@ -77,8 +77,7 @@
   :ensure nil
   :hook (after-init . save-place-mode))
 
+(setq inhibit-compacting-font-caches t)
+
 ;;; init-default.el ends here
 (provide 'init-basic)
-
-
-789
