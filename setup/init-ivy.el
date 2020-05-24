@@ -1,4 +1,5 @@
 (require 'package)
+(require 'counsel)
 
 (use-package counsel
   :hook ((after-init . ivy-mode)
@@ -68,9 +69,6 @@
                                             fzf-basename
                                             " in directory: "))))
       (counsel-fzf nil initial-directory (concat "Search " initial-directory " for: ")))))
-
-(use-package ivy-rich
-  :init (ivy-rich-mode 1))
 
 ;;; init-keys.el ends here
 (provide 'init-ivy)

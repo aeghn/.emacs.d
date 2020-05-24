@@ -1,0 +1,2 @@
+;;; Generated package description from /home/chin/.emacs.d/elpa/leetcode-20200517.1351/leetcode.el  -*- no-byte-compile: t -*-
+(define-package "leetcode" "20200517.1351" "An leetcode client." '((emacs "26") (dash "2.16.0") (graphql "0.1.1") (spinner "1.7.3") (aio "1.0") (log4e "0.3.3")) :commit "c4f793ecfe3723c7e121909ec59191c6e89f4d78" :keywords '("extensions" "tools") :authors '(("Wang Kai" . "kaiwkx@gmail.com")) :maintainer '("Wang Kai" . "kaiwkx@gmail.com") :url "https://github.com/kaiwk/leetcode.el")

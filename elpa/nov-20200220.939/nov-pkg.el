@@ -1,2 +1,0 @@
-;;; Generated package description from /home/chin/.emacs.d/elpa/nov-20200220.939/nov.el  -*- no-byte-compile: t -*-
-(define-package "nov" "20200220.939" "Featureful EPUB reader mode" '((dash "2.12.0") (esxml "0.3.3") (emacs "24.4")) :commit "cd1b264b3f978a9285fa9297e40ad29d1434adf5" :keywords '("hypermedia" "multimedia" "epub") :authors '(("Vasilij Schneidermann" . "mail@vasilij.de")) :maintainer '("Vasilij Schneidermann" . "mail@vasilij.de") :url "https://github.com/wasamasa/nov.el")

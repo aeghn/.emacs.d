@@ -16,7 +16,7 @@
      ((< window-count 3)
       (cond
        ((= input-key 15)
-        (counsel-ibuffer))
+        (counsel-ibuffer " *Counsel-temp-ibuffer*"))
        ((= input-key 111)
         (ace-window t))
        ((= input-key 14)

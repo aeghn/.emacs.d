@@ -43,7 +43,7 @@
    `(ffap ((t (:foreground ,fg0))))
    `(fringe ((t (:background ,stein-bg :foreground ,fg0))))
    `(highlight ((t (:foreground ,fg3 :background ,bg3))))
-   `(hl-line ((t (:background ,stein-current))))
+   `(hl-line ((t (:background nil :underline t))))
    `(info-quoted-name ((t (:foreground ,stein-blue))))
    `(info-string ((t (:foreground ,stein-yellow))))
    `(lazy-highlight ((t (:foreground ,fg2 :background ,bg3))))
@@ -335,8 +335,8 @@
    `(message-mml ((t (:foreground ,stein-green :weight normal))))
    `(message-header-xheader ((t (:foreground ,stein-cyan :weight normal))))
    ;; mini-modeline
-   ;; `(mini-modeline-mode-line ((t (:background ,stein-yellow :height 0.1 :box nil))))
-   ;; `(mini-modeline-mode-line-inactive ((t (:background ,stein-comment :height 0.1 :box nil))))
+   `(mini-modeline-mode-line ((t (:background ,stein-yellow :box nil))))
+   `(mini-modeline-mode-line-inactive ((t (:background ,stein-comment :box nil))))
    ;; mode-line
    `(mode-line ((t (:foreground nil :background ,bg2 :box ,bg3))))
    `(mode-line-inactive ((t (:foreground ,stein-fg :background ,stein-bg :box ,bg2))))

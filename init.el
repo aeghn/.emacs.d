@@ -1,7 +1,5 @@
 (prefer-coding-system 'utf-8)
 
-(setq comp-deferred-compilation t)
-
 (defvar user-emacs-directory (file-truename "~/.emacs.d/"))
 
 (defvar chin/configuration-files-directory (expand-file-name "setup" user-emacs-directory)
@@ -52,8 +50,7 @@
          (require 'init-ui)
          (require 'init-cc)
          (require 'init-dired)
-         (require 'init-modeline)
-         ))
+         (require 'init-interface)))
       ((string-equal "chinbox" chin/emacs-load-mode)
        (progn
          (require 'init-org)

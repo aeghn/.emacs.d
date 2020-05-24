@@ -1,0 +1,2 @@
+;;; Generated package description from /home/chin/.emacs.d/elpa/calibredb-20200516.1445/calibredb.el  -*- no-byte-compile: t -*-
+(define-package "calibredb" "20200516.1445" "Yet another calibre client" '((emacs "25.1") (org "9.0") (transient "0.2.0")) :authors '(("Damon Chan" . "elecming@gmail.com")) :maintainer '("Damon Chan" . "elecming@gmail.com") :keywords '("tools") :url "https://github.com/chenyanming/calibredb.el")

@@ -1,0 +1,1 @@
+((calibredb :repo "chenyanming/calibredb.el" :fetcher github))

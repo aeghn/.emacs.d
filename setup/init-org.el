@@ -39,7 +39,7 @@
 (setq org-ellipsis " ...")
 
 ;; make available "org-bullet-face" such that I can control the font size individually
-(setq org-bullets-face-name (quote org-bullet-face))
+;; (setq org-bullets-face-name (quote org-bullet-face))
 (setq org-log-done 'time)
 (setq org-hide-emphasis-markers nil)
 (setq org-src-tab-acts-natively t)
@@ -63,7 +63,7 @@
 
 (require 'org-capture)
 (setq org-capture-templates
-      '(("t" "ToDo" entry (file "~/orgs/chinbox/inbox.org")
+      '(("t" "ToDo" entry (file (expand-file-name "test.org" default-directory))
          "* TODO %^{ToDo}\n  ADDED: %U " :empty-lines 1 :kill-buffer t)
         ("n" "Note" entry (file "~/orgs/chinbox/inbox.org")
          "* %^{note}\n     %U " :empty-lines 1 :kill-buffer t)))

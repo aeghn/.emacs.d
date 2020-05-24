@@ -45,10 +45,16 @@
               ([remap xref-find-definitions] . lsp-find-definition)
               ([remap xref-find-references] . lsp-find-references))
   :config
-  (setq lsp-prefer-capf t)
-  )
-
+  (setq lsp-prefer-capf t))
+(use-package lsp-ui
+  :init
+  (setq lsp-ui-imenu-enable t))
 (use-package lsp-ui :commands lsp-ui-mode)
 (use-package company-lsp :commands company-lsp)
+
+(use-package lsp-python-ms
+  :ensure t
+  :hook (python-mode . (lambda ()
+                          (require 'lsp-python-ms)(lsp-deferred))))  ; or lsp-deferred
 
 (provide 'init-completion)

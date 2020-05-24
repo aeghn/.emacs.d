@@ -27,14 +27,17 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 
 (require 'package)
-(setq package-archives '(("gnu"   . "http://mirrors.163.com/elpa/gnu/")
-                         ("melpa" . "http://mirrors.163.com/elpa/melpa/")
-                         ("org"   . "http://mirrors.163.com/elpa/org/")))
+(setq package-archives '(("gnu"   . "https://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
+                         ("melpa" . "https://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
+                         ("org"   . "https://mirrors.tuna.tsinghua.edu.cn/elpa/org/")))
+
 (package-initialize)
 
 ;; (setq use-package-always-ensure t)
 ;; (setq use-package-always-defer t)
 (require 'use-package)
+(setq quelpa-update-melpa-p nil)
+(require 'quelpa-use-package)
 
 (use-package no-littering
   :demand t
@@ -71,7 +74,9 @@
 (bind-key "M-h" 'backward-kill-word)
 (bind-key "C-c r" 'chin/revert-buffer)
 (bind-key "C-;" 'comment-dwim-2)
+(global-unset-key (kbd "C-z"))
 (global-set-key (kbd "<f2>") (lambda() (interactive)(find-file "~/.emacs.d/timeline.org")))
+
 
 (use-package saveplace
   :ensure nil

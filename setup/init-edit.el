@@ -28,9 +28,10 @@
   :hook ((css-mode scss-mode less-css-mode html-mode web-mode php-mode) . rainbow-mode))
 
 ;; Highlight the current line
-(use-package hl-line
-  :ensure nil
-  :hook (after-init . global-hl-line-mode))
+;; (use-package hl-line
+  ;; :ensure nil
+  ;; :hook
+  ;; (after-init . global-hl-line-mode))
 
 (use-package anzu
   :bind

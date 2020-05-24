@@ -1,2 +1,0 @@
-;;; Generated package description from /home/chin/.emacs.d/elpa/swiper-20200427.846/swiper.el  -*- no-byte-compile: t -*-
-(define-package "swiper" "20200427.846" "Isearch with an overview. Oh, man!" '((emacs "24.5") (ivy "0.13.0")) :commit "7b3b67276ae47d8000c29c565ab8007c87a5ffa5" :keywords '("matching") :authors '(("Oleh Krehel" . "ohwoeowho@gmail.com")) :maintainer '("Oleh Krehel" . "ohwoeowho@gmail.com") :url "https://github.com/abo-abo/swiper")

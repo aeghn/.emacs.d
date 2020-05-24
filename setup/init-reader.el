@@ -68,4 +68,8 @@
     (visual-line-mode 1)
     (olivetti-mode 1)))
 
+(use-package calibredb
+  :quelpa
+  (calibredb :repo "chenyanming/calibredb.el" :fetcher github))
+
 (provide 'init-reader)
