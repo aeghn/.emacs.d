@@ -36,6 +36,9 @@
         )
   (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1))))
 
+(use-package valign
+  :load-path "/home/chin/.emacs.d/site-lisp/valign")
+
 (setq org-ellipsis " ...")
 
 ;; make available "org-bullet-face" such that I can control the font size individually
