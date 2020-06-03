@@ -1,2 +1,0 @@
-;;; Generated package description from /home/chin/.emacs.d/elpa/undo-fu-20200520.107/undo-fu.el  -*- no-byte-compile: t -*-
-(define-package "undo-fu" "20200520.107" "Undo helper with redo" '((emacs "24.3")) :commit "a651bb3035067ae725f74e1c815bfe3e7305c8ca" :authors '(("Campbell Barton" . "ideasman42@gmail.com")) :maintainer '("Campbell Barton" . "ideasman42@gmail.com") :url "https://gitlab.com/ideasman42/emacs-undo-fu")

@@ -6,6 +6,7 @@
       scroll-margin 4)
 
 ;; Mode-line
+
 (use-package minions
   :config
   (add-hook #'after-init-hook #'minions-mode))
@@ -52,7 +53,7 @@ directory too."
 
 ;; %-Constructs - GNU Emacs Lisp Reference Manual: https://www.gnu.org/software/emacs/manual/html_node/elisp/_0025_002dConstructs.html
 (setq-default mode-line-format
-              (let ((spaces "   "))
+              (let ((spaces "     "))
                 `(
                   " "
                   (:eval (buffer-status))
@@ -60,9 +61,10 @@ directory too."
                   mode-line-directory
                   "%b"
                   ,spaces
-                  "%C %p"
+                  "%l:%C %p"
                   ,spaces
                   mode-line-modes
+                  ,spaces               
                   vc-mode
                   ,spaces
                   mode-line-misc-info

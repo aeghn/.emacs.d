@@ -41,7 +41,10 @@
         ivy-fixed-height-minibuffer t
         ivy-count-format "(%d/%d) "
         ivy-on-del-error-function nil
-        ivy-initial-inputs-alist nil)
+        ivy-initial-inputs-alist nil
+        ;; Show full history file name
+        ivy-virtual-abbreviate 'abbreviate)
+        ;; )
 
   (setq swiper-action-recenter t)
 
@@ -69,6 +72,13 @@
                                             fzf-basename
                                             " in directory: "))))
       (counsel-fzf nil initial-directory (concat "Search " initial-directory " for: ")))))
+
+(use-package ivy-rich
+  :init
+  (ivy-rich-mode 1)
+  ;; For better performance
+  (setq ivy-rich-parse-remote-buffer nil))
+
 
 ;;; init-keys.el ends here
 (provide 'init-ivy)

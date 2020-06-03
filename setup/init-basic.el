@@ -5,6 +5,23 @@
                     :weight 'normal
                     :width 'normal)
 
+;; (set-face-attribute
+;;  'default nil
+;;  :font (font-spec :family "AFS"
+;;                   :weight 'normal
+;;                   :slant 'normal
+;;                   :size 14.0))
+;; (dolist (charset '(kana han symbol cjk-misc bopomofo))
+;;   (set-fontset-font
+;;    (frame-parameter nil 'font)
+;;    charset
+;;    (font-spec :family "Adobe Heiti Std"
+;;               :weight 'normal
+;;               :slant 'normal
+;;               :size 12.0)))
+;; (setq face-font-rescale-alist '(("Adobe Heiti Std" . 1.0)))
+
+
 ;; Backup file and auto save default files
 (setq-default make-backup-files nil
               history-length 1000)
@@ -64,6 +81,13 @@
   (interactive)
   (revert-buffer t t t)
   (message "buffer is reverted"))
+
+(defun my-insert-tab-char ()
+  "Insert a tab char. (ASCII 9, \t)"
+  (interactive)
+  (insert "\t"))
+
+(bind-key "C-t" 'my-insert-tab-char)
 
 (bind-keys :prefix-map chin/plugins-map
            :prefix "M-m")

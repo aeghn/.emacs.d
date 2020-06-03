@@ -40,7 +40,7 @@ vi style of % jumping to matching brace."
 ;; recentf
 (use-package recentf
   :ensure nil
-  :bind (("C-x C-r" . recentf-open-files))
+  ;; :bind (("C-x C-r" . recentf-open-files))
   :hook (after-init . recentf-mode)
   :init
   (setq recentf-max-saved-items 300)
@@ -62,7 +62,7 @@ vi style of % jumping to matching brace."
   (keyfreq-mode 1)
   (keyfreq-autosave-mode 1))
 
-(global-display-line-numbers-mode 1)
+;; (global-display-line-numbers-mode -1)
 
 ;;; init-default.el ends here
 (provide 'init-default)

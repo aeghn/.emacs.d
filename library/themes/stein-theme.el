@@ -513,7 +513,13 @@
        ("STARTED" :weight bold :foreground ,stein-green )
        ("WAIT" :weight bold :foreground ,stein-cyan )
        ("DONE" :weight bold :foreground ,stein-comment )
-       ))))
+       ))
+   ;; '(mouse-scroll-delay 0)
+   '(mouse-wheel-flip-direction t)
+   '(mouse-wheel-progressive-speed nil)
+   '(mouse-wheel-scroll-amount '(0.005))
+   '(mouse-wheel-tilt-scroll t)
+   ))
 
 (provide-theme 'stein)
 
