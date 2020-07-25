@@ -85,3 +85,4 @@
    CLOSED: [2020-04-09 Thu 10:01]
 * DONE Dired mode Create new file <N>
   CLOSED: [2020-04-09 Thu 10:02]
+* C-t 执行 last command

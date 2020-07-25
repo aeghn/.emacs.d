@@ -1,18 +1,17 @@
 (require 's)
 (require 'dash)
+(require 'minions)
 
 (setq scroll-bar-mode nil
       scroll-conservatively 101
       scroll-margin 4)
 
 ;; Mode-line
-
 (use-package minions
   :config
   (add-hook #'after-init-hook #'minions-mode))
 
 (defun buffer-status ()
-  "Return different icon for different buffer status"
   (if buffer-read-only (if (buffer-modified-p) "■" "□")
     (if overwrite-mode (if (buffer-modified-p) "▲" "△")
       (if (buffer-modified-p) "●" "◎"))))
@@ -53,7 +52,7 @@ directory too."
 
 ;; %-Constructs - GNU Emacs Lisp Reference Manual: https://www.gnu.org/software/emacs/manual/html_node/elisp/_0025_002dConstructs.html
 (setq-default mode-line-format
-              (let ((spaces "     "))
+              (let ((spaces "  "))
                 `(
                   " "
                   (:eval (buffer-status))
@@ -64,11 +63,12 @@ directory too."
                   "%l:%C %p"
                   ,spaces
                   mode-line-modes
-                  ,spaces               
+                  ,spaces
+                  (flycheck-mode flycheck-mode-line)                  
+                  ,spaces
                   vc-mode
                   ,spaces
                   mode-line-misc-info
-
                   mode-line-end-spaces)))
 
 ;; bindings related to mode-line

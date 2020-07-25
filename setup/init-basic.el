@@ -1,31 +1,31 @@
 ;; font settings.
-(set-face-attribute 'default nil
-                    :family "AMS"
-                    :height 120
-                    :weight 'normal
-                    :width 'normal)
+(setq inhibit-compacting-font-caches t)
 
-;; (set-face-attribute
-;;  'default nil
-;;  :font (font-spec :family "AFS"
-;;                   :weight 'normal
-;;                   :slant 'normal
-;;                   :size 14.0))
-;; (dolist (charset '(kana han symbol cjk-misc bopomofo))
-;;   (set-fontset-font
-;;    (frame-parameter nil 'font)
-;;    charset
-;;    (font-spec :family "Adobe Heiti Std"
-;;               :weight 'normal
-;;               :slant 'normal
-;;               :size 12.0)))
-;; (setq face-font-rescale-alist '(("Adobe Heiti Std" . 1.0)))
+(defun chin/set-font ()
+  (set-face-attribute
+   'default nil
+   :font (font-spec :family "Roboto Mono"
+                    :weight 'normal
+                    :slant 'normal
+                    :size 14))
+  (dolist (charset '(kana han symbol cjk-misc bopomofo))
+    (set-fontset-font
+     (frame-parameter nil 'font)
+     charset
+     (font-spec :family "Adobe Heiti Std"
+                :weight 'normal
+                :slant 'normal)))
+  (use-cjk-char-width-table 'zh_CN)
+  (setq face-font-rescale-alist '(("Adobe Heiti Std" . 1.1))))
+(add-hook 'after-make-frame-functions
+          (lambda (frame)
+            (select-frame frame)
+            (if (display-graphic-p) (chin/set-font))))
 
 
 ;; Backup file and auto save default files
 (setq-default make-backup-files nil
               history-length 1000)
-
 
 (setq auto-save-default nil
       save-silently t
@@ -87,10 +87,9 @@
   (interactive)
   (insert "\t"))
 
-(bind-key "C-t" 'my-insert-tab-char)
-
-(bind-keys :prefix-map chin/plugins-map
-           :prefix "M-m")
+(global-unset-key (kbd "M-m"))
+(define-prefix-command 'chin/private-map)
+(global-set-key (kbd "M-m") 'chin/private-map)
 
 (bind-key "C-a" 'chin/move-beginning-of-line)
 (bind-key "C-h" 'backward-delete-char-untabify)
@@ -106,7 +105,7 @@
   :ensure nil
   :hook (after-init . save-place-mode))
 
-(setq inhibit-compacting-font-caches t)
+(setq-default chin/window-manager nil)
 
 ;;; init-default.el ends here
 (provide 'init-basic)

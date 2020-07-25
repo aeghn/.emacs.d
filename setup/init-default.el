@@ -64,5 +64,27 @@ vi style of % jumping to matching brace."
 
 ;; (global-display-line-numbers-mode -1)
 
+(use-package windmove
+  :bind
+  ("<H-up>" . windmove-up)
+  ("<H-down>" . windmove-down)
+  ("<H-left>" . windmove-left)
+  ("<H-right>" . windmove-right))
+
+;; Expand region
+(use-package expand-region
+  :init
+  (require 'expand-region)
+  :bind (("C-=" . er/expand-region))
+  :config
+  (define-advice set-mark-command (:before-while (arg))
+    "Repeat C-SPC to expand region."
+    (interactive "P")
+    (if (eq last-command 'set-mark-command)
+        (progn
+          (er/expand-region 1)
+          nil)
+      t)))
+
 ;;; init-default.el ends here
 (provide 'init-default)

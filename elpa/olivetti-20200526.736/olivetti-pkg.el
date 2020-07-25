@@ -1,2 +1,0 @@
-;;; Generated package description from /home/chin/.emacs.d/elpa/olivetti-20200526.736/olivetti.el  -*- no-byte-compile: t -*-
-(define-package "olivetti" "20200526.736" "Minor mode for a nice writing environment" '((emacs "24.5")) :commit "2728ee5be9841760230ba149992240ce036b89bd" :keywords '("wp" "text") :authors '(("William Rankin" . "william@bydasein.com")) :maintainer '("William Rankin" . "william@bydasein.com") :url "https://gthub.com/rnkn/olivetti")

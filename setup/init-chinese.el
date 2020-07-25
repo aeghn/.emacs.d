@@ -52,6 +52,8 @@
 ;;                                  module-file-suffix))
 ;;     (liberime-build)))
 
+
+
 (use-package rime
   :bind
   (("M-j" . rime-force-enable)
@@ -59,13 +61,16 @@
 
   :config
   (setq rime-user-data-dir "~/.config/fcitx/rime")
+
   (setq rime-translate-keybindings
         '("C-f" "C-b" "C-n" "C-p" "C-g"))
   (setq default-input-method "rime"
         rime-show-candidate 'posframe
         rime-show-preedit 'inline)
   (defvar rime-input-mode nil)
-  
+  (setq rime-posframe-properties
+        (list :font "AMS"
+              :internal-border-width 10))
   ;; Use English if return t,
   ;; use Chinese if return nil.
   (defun rime-english-mode ()
@@ -81,10 +86,14 @@ Chinese followed by Chinese.
 English followed by English.
 Space followed by English."
     (activate-input-method "rime")
-    (if (> (point) (save-excursion (back-to-indentation) (point)))
-        (if (looking-back " +" 1)
-            (looking-back "\\cc +" 2)
-          (not (looking-back "\\cc" 1)))))
+    (cond
+     ((org-in-src-block-p) t)
+     (chin/window-manager t)
+     ((> (point) (save-excursion (back-to-indentation) (point)))
+      (if (looking-back " +" 1)
+          (looking-back "\\cc +" 2)
+        (not (looking-back "\\cc" 1))))))
+  
   (defun rime-switch-mode ()
     "Switch between Chinese and English modes."
     (interactive)

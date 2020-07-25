@@ -20,9 +20,9 @@
               elfeed-show-entry-delete #'delete-window)
   :config
   (use-package elfeed-org
-  :config
-  (elfeed-org)
-  (setq rmh-elfeed-org-files (list chin/elfeed-org-file)))
+    :config
+    (elfeed-org)
+    (setq rmh-elfeed-org-files (list chin/elfeed-org-file)))
 
   (defun chin/elfeed-show-setup ()
     (olivetti-mode 1))
@@ -32,7 +32,7 @@
     (interactive)
     (if (getenv "ALL_PROXY")
         (setenv "ALL_PROXY" nil)
-      (setenv "ALL_PROXY" "socks5h://127.0.0.1:1080"))
+      (setenv "ALL_PROXY" "http://127.0.0.1:7890"))
     (message "ALL_PROXY is %s" (getenv "ALL_PROXY"))))
 
 (use-package pdf-view
@@ -68,8 +68,12 @@
     (visual-line-mode 1)
     (olivetti-mode 1)))
 
-(use-package calibredb
-  :quelpa
-  (calibredb :repo "chenyanming/calibredb.el" :fetcher github))
+(use-package beancount
+  :defer t
+  :load-path "/usr/elisp/"
+  :bind ("M-m b" . (lambda() (interactive) (find-file "~/docs/beancount/main.bean")))
+  :mode ("\\.bean\\(?:count\\)?\\'" . beancount-mode)
+  :hook (beancount-mode . yas-minor-mode-on)
+  :custom (beancount-accounts-files (directory-files "~/docs/beancount/accounts" 'full (rx ".bean" eos))))
 
 (provide 'init-reader)

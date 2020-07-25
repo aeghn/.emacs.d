@@ -28,8 +28,13 @@
 ;; (setq org-bullets-bullet-list '("◉" "◎" "☉" "○"))
 ;;  "◉"  "▣" "◈" "◬"
 ;;"㊎" "㊍" "㊌" "㊋" "㊏"
+
 ;; org ellipsis options, other than the default Go to Node.
 ;; not supported in common font, but supported in Symbola (my fall-back font) ⬎,     ⤷, ⤵
+;; Use variable width font faces in current buffer
+
+;; Setting fonts for org-mode
+
 (use-package org-superstar
   :config
   (setq org-superstar-headline-bullets-list '("◉" "◎" "☉" "○")
@@ -48,7 +53,6 @@
 (setq org-src-tab-acts-natively t)
 
 ;;(add-hook 'org-mode-hook 'visual-line-mode)
-
 (setq org-todo-keywords
       '((sequence "TODO(t)" "STARTED(s)" "WAIT(w)" "|" "DONE(d)" "CANCELED(c)")))
 
@@ -73,5 +77,29 @@
 (global-set-key (kbd "C-c o c") 'org-capture)
 (setq org-agenda-files (list "~/orgs/chinbox/inbox.org"))
 (global-set-key (kbd "C-c o a") 'org-agenda)
+
+
+(use-package org-download
+  :hook (org-mode-hook . org-download-enable))
+
+(use-package org-roam
+  (setq org-roam-directory "~/orgs/org-roam/"))
+
+(use-package org-roam-server
+  :after org-roam
+  :config
+  (setq org-roam-server-host "127.0.0.1"
+        org-roam-server-port 8078
+        org-roam-server-export-inline-images t
+        org-roam-server-authenticate nil
+        org-roam-server-label-truncate t
+        org-roam-server-label-truncate-length 60
+        org-roam-server-label-wrap-length 20)
+  (defun org-roam-server-open ()
+    "Ensure the server is active, then open the roam graph."
+    (interactive)
+    (org-roam-server-mode 1)
+    (browse-url-xdg-open (format "http://localhost:%d" org-roam-server-port))))
+
 
 (provide 'init-org)

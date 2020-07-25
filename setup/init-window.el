@@ -25,13 +25,32 @@
         (previous-buffer))
        ((= input-key 11)
         (kill-current-buffer))
-       ((= input-key 10) ;C-j
-        (switch-to-last-buffer))))
+       ((= input-key 10)
+        (switch-to-buffer nil))))
 
      ((> window-count 2)
       (ace-window t)))))
 
 (bind-key* "C-o" 'chin/windows)
+
+
+(defun chin/jump ()
+  "Goto line or word"
+  (interactive)
+  (cond
+   ((= input-key 15)
+    (ivy-switch-buffer))
+   ((= input-key 111)
+    (ace-window t))
+   ((= input-key 14)
+    (next-buffer))
+   ((= input-key 16)
+    (previous-buffer))
+   ((= input-key 11)
+    (kill-current-buffer))
+   ((= input-key 10)
+    (switch-to-last-buffer))))
+
 
 (use-package ace-window
   :commands (ace-window-display-mode ace-window)

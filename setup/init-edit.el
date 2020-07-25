@@ -40,6 +40,13 @@
    ([remap isearch-query-replace] . anzu-isearch-query-replace)
    ([remap isearch-query-replace-regexp] . anzu-isearch-query-replace-regexp)))
 
+
+;; Automatic parenthesis pairing
+(use-package elec-pair
+  :ensure nil
+  :hook (after-init . electric-pair-mode)
+  :init (setq electric-pair-inhibit-predicate 'electric-pair-conservative-inhibit))
+
 (use-package highlight-indent-guides
   :config
   (setq  highlight-indent-guides-method 'character)

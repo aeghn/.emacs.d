@@ -29,12 +29,12 @@
 ;; (require 'exwm-config)
 ;; (exwm-config-default)
 
-(require 'benchmark-init)
+;; (require 'benchmark-init)
 ;; To disable collection of benchmark data after init is done.
-(add-hook 'after-init-hook 'benchmark-init/deactivate)
+;; (add-hook 'after-init-hook 'benchmark-init/deactivate)
 ;; Choose different load mode
 (defvar chin/emacs-load-mode (getenv "_EMACS_LOAD_MODE_"))
-(cond ((not chin/emacs-load-mode)
+ (cond ((not chin/emacs-load-mode)
        (progn
          (require 'init-default)
          (require 'init-chinese)
