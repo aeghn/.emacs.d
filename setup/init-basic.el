@@ -6,21 +6,22 @@
    'default nil
    :font (font-spec :family "Roboto Mono"
                     :weight 'normal
-                    :slant 'normal
-                    :size 14))
+                    :size 11.0))
   (dolist (charset '(kana han symbol cjk-misc bopomofo))
     (set-fontset-font
      (frame-parameter nil 'font)
      charset
      (font-spec :family "Adobe Heiti Std"
-                :weight 'normal
-                :slant 'normal)))
+                :weight 'normal)))
   (use-cjk-char-width-table 'zh_CN)
-  (setq face-font-rescale-alist '(("Adobe Heiti Std" . 1.1))))
+  (setq face-font-rescale-alist '(("Adobe Heiti Std" . 1.0))))
+
 (add-hook 'after-make-frame-functions
           (lambda (frame)
             (select-frame frame)
-            (if (display-graphic-p) (chin/set-font))))
+            (if (display-graphic-p)
+                (chin/set-font))
+            ))
 
 
 ;; Backup file and auto save default files

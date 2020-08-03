@@ -68,6 +68,7 @@
         rime-show-candidate 'posframe
         rime-show-preedit 'inline)
   (defvar rime-input-mode nil)
+  (setq-default rime-now-state nil)
   (setq rime-posframe-properties
         (list :font "AMS"
               :internal-border-width 10))

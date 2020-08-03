@@ -35,10 +35,14 @@
 
 ;; Setting fonts for org-mode
 
+;; (add-hook 'org-mode-hook
+;;           (lambda ()
+;;             (setq buffer-face-mode-face '(:family "FZJuZhenXinFang-R-JF"))
+;;             (buffer-face-mode)))
+
 (use-package org-superstar
   :config
-  (setq org-superstar-headline-bullets-list '("◉" "◎" "☉" "○")
-        )
+  (setq org-superstar-headline-bullets-list '("*"))
   (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1))))
 
 (use-package valign
@@ -100,6 +104,5 @@
     (interactive)
     (org-roam-server-mode 1)
     (browse-url-xdg-open (format "http://localhost:%d" org-roam-server-port))))
-
 
 (provide 'init-org)
