@@ -22,6 +22,11 @@
 
 (setq gc-cons-threshold (* 100 1024 1024))
 
+(setq
+ ;; comp-deferred-compilation t
+ comp-async-jobs-number 4)
+
+
 (require 'cl-lib)
 (require 'init-basic)
 
@@ -56,4 +61,5 @@
          (require 'init-org)
          (require 'init-ivy)
          (require 'init-chinese)
+         (require 'init-window)
          (require 'init-chinbox))))

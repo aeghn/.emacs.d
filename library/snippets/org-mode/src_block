@@ -2,6 +2,6 @@
 # name: org-code-block
 # key: <s
 # --
-#+begin_src 
-$0
-#+end_src
+#+BEGIN_SRC $1
+  $0
+#+END_SRC

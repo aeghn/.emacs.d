@@ -1,28 +1,6 @@
 ;; font settings.
 (setq inhibit-compacting-font-caches t)
 
-(defun chin/set-font ()
-  (set-face-attribute
-   'default nil
-   :font (font-spec :family "Roboto Mono"
-                    :weight 'normal
-                    :size 11.0))
-  (dolist (charset '(kana han symbol cjk-misc bopomofo))
-    (set-fontset-font
-     (frame-parameter nil 'font)
-     charset
-     (font-spec :family "Adobe Heiti Std"
-                :weight 'normal)))
-  (use-cjk-char-width-table 'zh_CN)
-  (setq face-font-rescale-alist '(("Adobe Heiti Std" . 1.0))))
-
-(add-hook 'after-make-frame-functions
-          (lambda (frame)
-            (select-frame frame)
-            (if (display-graphic-p)
-                (chin/set-font))
-            ))
-
 
 ;; Backup file and auto save default files
 (setq-default make-backup-files nil
@@ -107,6 +85,30 @@
   :hook (after-init . save-place-mode))
 
 (setq-default chin/window-manager nil)
+
+(use-package yasnippet
+  :diminish yas-minor-mode
+  :init
+  (add-to-list 'yas-snippet-dirs (expand-file-name "snippets" chin/library-files-directory))
+  :hook
+  (after-init . yas-global-mode)
+  :config
+  (require 'warnings)
+  (add-to-list 'warning-suppress-types '(yasnippet backquote-change))
+  )
+
+;; (defun replace-before-paste ()
+;;   (interactive)
+;;   (let* ((content (current-kill 0))
+;;          (content (s-replace "\"" "\\\"" content))
+;;          (content (s-replace "<" "\\<" content))
+;;          (content (s-replace ">" "\\>" content)))
+;;     (insert content)))
+
+
+
+
+;; (bind-key "C-y" 'replace-before-paste)
 
 ;;; init-default.el ends here
 (provide 'init-basic)

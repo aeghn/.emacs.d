@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: src_block_java
+# key: srcj
+# --
+#+BEGIN_SRC java :classname $1
+$2
+#+END_SRC

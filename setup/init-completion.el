@@ -3,11 +3,6 @@
 ;;; Commentary:
 
 ;;; Code:
-(use-package yasnippet
-  :diminish yas-minor-mode
-  :init
-  (add-to-list 'yas-snippet-dirs (expand-file-name "snippets" chin/library-files-directory))
-  :hook (after-init . yas-global-mode))
 
 (use-package yasnippet-snippets
   :after yasnippet)

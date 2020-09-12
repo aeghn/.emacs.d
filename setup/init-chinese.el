@@ -52,26 +52,33 @@
 ;;                                  module-file-suffix))
 ;;     (liberime-build)))
 
-
-
 (use-package rime
   :bind
   (("M-j" . rime-force-enable)
-   ("M-m c" . rime-switch-mode))
+   ("M-m c" . rime-switch-mode)
+   :map rime-active-mode-map
+   ("TAB" . rime-inline-ascii))
+  :custom
+  (rime-emacs-module-header-root "~/.local/include")
 
   :config
   (setq rime-user-data-dir "~/.config/fcitx/rime")
 
   (setq rime-translate-keybindings
         '("C-f" "C-b" "C-n" "C-p" "C-g"))
+
   (setq default-input-method "rime"
         rime-show-candidate 'posframe
         rime-show-preedit 'inline)
+
   (defvar rime-input-mode nil)
-  (setq-default rime-now-state nil)
   (setq rime-posframe-properties
         (list :font "AMS"
               :internal-border-width 10))
+
+  (setq rime-disable-predicates
+        '(rime-english-mode))
+
   ;; Use English if return t,
   ;; use Chinese if return nil.
   (defun rime-english-mode ()
@@ -81,36 +88,37 @@ Space followed by English."
     (if (> (point) (save-excursion (back-to-indentation) (point)))
         (not (looking-back "\\cc" 1))
       t))
+
   (defun rime-chinese-mode ()
     "Start new line with Chinese.
 Chinese followed by Chinese.
 English followed by English.
 Space followed by English."
-    (activate-input-method "rime")
+    ;; (activate-input-method 'rime)
     (cond
-     ((org-in-src-block-p) t)
-     (chin/window-manager t)
+     ((and (org-in-src-block-p) (not (looking-back "\\cc" 1))) t)
      ((> (point) (save-excursion (back-to-indentation) (point)))
       (if (looking-back " +" 1)
           (looking-back "\\cc +" 2)
         (not (looking-back "\\cc" 1))))))
-  
+
   (defun rime-switch-mode ()
     "Switch between Chinese and English modes."
     (interactive)
+    (activate-input-method 'rime)
     (if (member 'rime-chinese-mode rime-disable-predicates)
-        (progn (setq rime-disable-predicates
-                     '(rime-english-mode))
-               (setq rime-input-mode "English"))
-      (progn (setq rime-disable-predicates
-                   '(rime-chinese-mode))
-             (setq rime-input-mode "Chinese")))
+        (setq rime-disable-predicates '(rime-english-mode)
+              rime-input-mode "ENGLISH")
+      (setq rime-disable-predicates '(rime-chinese-mode)
+            rime-input-mode "CHINESE"))
     (if (string= current-input-method "rime")
-        (message "Current input method is %s and mode is %s" current-input-method rime-input-mode)
-      (activate-input-method 'rime)))
+        (message "Current input mode is %s" rime-input-mode)))
 
-  (setq rime-disable-predicates
-        '(rime-english-mode)))
+  (defun chin/half-Chinese-symbols ()
+    "Toggle full symbols into half width"
+    ))
+
+
 
 (use-package cal-china-x
   :after calendar

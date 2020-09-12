@@ -4,8 +4,8 @@
 (use-package counsel
   :hook ((after-init . ivy-mode)
          (ivy-mode   . counsel-mode))
-  :bind ( ;;("C-s"   . swiper-isearch)
-         ;;("C-r"   . swiper-isearch-backward)
+  :bind ( ("C-s"   . swiper-isearch)
+         ("C-r"   . swiper-isearch-backward)
          ("C-S-f"   . swiper)
          ("C-S-s" . swiper-all)
 
