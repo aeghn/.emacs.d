@@ -1,0 +1,2 @@
+;;; Generated package description from /home/chin/.emacs.d/elpa/fetch-20131201.730/fetch.el  -*- no-byte-compile: t -*-
+(define-package "fetch" "20131201.730" "Fetch and unpack resources" 'nil :commit "3f2793afcbbc32f320e572453166f9354ecc6d06" :authors '(("Christian 'crshd' Brassat" . "christian.brassat@gmail.com")) :maintainer '("Christian 'crshd' Brassat" . "christian.brassat@gmail.com") :url "https://github.com/crshd/fetch.el")

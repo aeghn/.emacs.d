@@ -6,23 +6,26 @@
       scroll-conservatively 101
       scroll-margin 4)
 
-;; Mode-line
-(use-package minions
-  :config
-  (add-hook #'after-init-hook #'minions-mode))
+
+;;; Mode-line parts
+(defface mode-line-position-face
+  '((t :weight normal))
+  "Face used for buffer identification parts of the mode line."
+  :group 'mode-line-faces
+  :group 'basic-faces)
+
+(defvar mode-line-buffer-directory
+  '(:propertize
+    (:eval (if (buffer-file-name) (chin/shrink-path default-directory 15))))
+  "Formats the current directory.")
+(put 'mode-line-buffer-directory 'risky-local-variable t)
 
 (defun buffer-status ()
-  (if buffer-read-only (if (buffer-modified-p) "■" "□")
-    (if overwrite-mode (if (buffer-modified-p) "▲" "△")
-      (if (buffer-modified-p) "●" "◎"))))
+  (if buffer-read-only (if (buffer-modified-p) " Δ " " δ ")
+    (if overwrite-mode (if (buffer-modified-p) " Ω " " ω ")
+      (if (buffer-modified-p) " Φ " " φ "))))
 
-;; buffer directory
-;; thanks to https://github.com/justinwoo/broken-emacs-packages/blob/master/shrink-path-20170813.247/shrink-path.el
-(defun shrink-path--truncate (str)
-  "Return STR's first character or first two characters if hidden."
-  (substring str 0 (if (s-starts-with? "." str) 2 1)))
-
-(defun shrink-path--dirs-internal (full-path &optional given-length)
+(defun chin/shrink-path (full-path given-length)
   "Return fish-style truncated string based on FULL-PATH.
 Optional parameter TRUNCATE-ALL will cause the function to truncate the last
 directory too."
@@ -36,7 +39,7 @@ directory too."
         (->> split
              (--map-indexed (if (= it-index (1- split-len))
                                 it
-                              (shrink-path--truncate it)))
+                              (substring it 0 (if (s-starts-with? "." it) 2 1))))
              (s-join "/")
              (setq shrunk))
         (s-concat (unless (s-matches? (rx bos (or "~" "/")) shrunk) "/")
@@ -44,46 +47,47 @@ directory too."
                   (unless (s-ends-with? "/" shrunk) "/")))
     full-path))
 
-(defvar mode-line-directory
-  '(:propertize
-    (:eval (if (buffer-file-name) (shrink-path--dirs-internal default-directory 15))))
-  "Formats the current directory.")
-(put 'mode-line-directory 'risky-local-variable t)
+
+;; bindings related to mode-line
+(global-set-key (kbd "M-m m f")
+                (lambda ()
+                  (interactive)
+                  (message "Current file is: %s" buffer-file-name)))
+
+;; Reference: view-echo-area-messages
+(global-set-key (kbd "M-m n")
+                (lambda ()
+                  (interactive)
+                  (with-current-buffer (messages-buffer)
+                    (goto-char (point-max))
+                    (let ((win (display-buffer (current-buffer))))
+                      (select-window win)))))
 
 ;; %-Constructs - GNU Emacs Lisp Reference Manual: https://www.gnu.org/software/emacs/manual/html_node/elisp/_0025_002dConstructs.html
 (setq-default mode-line-format
-              (let ((spaces "  "))
-                `(
-                  " "
-                  (:eval (buffer-status))
-                  ,spaces
-                  mode-line-directory
-                  "%b"
-                  ,spaces
-                  "%l:%C %p"
-                  ,spaces
-                  mode-line-modes
-                  ,spaces
-                  (flycheck-mode flycheck-mode-line)                  
-                  ,spaces
-                  vc-mode
-                  ,spaces
-                  mode-line-misc-info
-                  mode-line-end-spaces)))
+              `(
+                (:eval (buffer-status))
+                " "
+                mode-line-buffer-directory
+                (:eval (propertize "%b" 'face 'mode-line-buffer-id))
+                "  "
+                (:eval (propertize "%l:%C %p" 'face 'mode-line-position-face))
+                "  "
+                mode-line-modes
+                "  "
+                (flycheck-mode flycheck-mode-line)
+                "  "
+                vc-mode
+                "  "
+                mode-line-misc-info
+                mode-line-end-spaces))
 
-;; bindings related to mode-line
-(global-set-key (kbd "M-m m f") (lambda ()
-                                  (interactive)
-                                  (message "Current file is: %s" buffer-file-name)))
+(use-package minions
+  :config
+  (add-hook #'after-init-hook #'minions-mode))
 
-;; Reference: view-echo-area-messages
-(global-set-key (kbd "M-m n") (lambda ()
-                                (interactive)
-                                (with-current-buffer (messages-buffer)
-                                  (goto-char (point-max))
-                                  (let ((win (display-buffer (current-buffer))))
-                                    (select-window win)))))
 
+;;; Header
 (setq-default frame-title-format '("%e" "%b" " - emacs"))
 
 (provide 'init-interface)

@@ -1,8 +1,6 @@
 ;; theme
 (load-theme 'stein t)
 
-(add-to-list 'default-frame-alist
-             '(font . "AMS 12"))
 ;; shortcuts
 ;; Open personal todo list
 (bind-key "M-m a" (lambda ()
@@ -19,7 +17,5 @@
 
 (setq org-agenda-files (directory-files-recursively "~/Workspace/docs/orgs/" "\\.org$"))
 (global-set-key (kbd "M-m t") 'org-agenda)
-
-
 
 (provide 'init-chinbox)

@@ -1,0 +1,2 @@
+;;; Generated package description from /home/chin/.emacs.d/elpa/org-static-blog-20200720.715/org-static-blog.el  -*- no-byte-compile: t -*-
+(define-package "org-static-blog" "20200720.715" "a simple org-mode based static blog generator" '((emacs "24.3")) :commit "58019b6dd1ae1323b72d491e65bf9636a9278dd6" :authors '(("Bastian Bechtold")) :maintainer '("Bastian Bechtold") :url "https://github.com/bastibe/org-static-blog")

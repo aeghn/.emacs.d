@@ -2,6 +2,6 @@
 # name: src_block_java
 # key: srcj
 # --
-#+BEGIN_SRC java :classname $1
-$2
+#+BEGIN_SRC java
+$1
 #+END_SRC

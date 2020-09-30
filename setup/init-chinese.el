@@ -54,8 +54,10 @@
 
 (use-package rime
   :bind
-  (("M-j" . rime-force-enable)
-   ("M-m c" . rime-switch-mode)
+  ;; (("M-j" . rime-force-enable)
+
+  (("M-m c" . rime-switch-mode)
+   ("M-c" . rime-change-state-manually)
    :map rime-active-mode-map
    ("TAB" . rime-inline-ascii))
   :custom
@@ -79,23 +81,47 @@
   (setq rime-disable-predicates
         '(rime-english-mode))
 
+  ;; nil for predicates
+  (setq-default rime-manual-lang nil)
+
+  (defun rime-after-change-function (beg end len)
+    "Add to hook `after-change-functions', in order to unbound `rime-manual-lang'"
+    (let ((inhibit-modification-hooks nil))
+      (makunbound 'rime-manual-lang)))
+
+  (defun rime-start ()
+    "If current input method is not rime, enable it and add `rime-after-change-function' hook"
+    (interactive)
+    (unless (member 'rime-after-change-function after-change-functions)
+      (add-hook 'after-change-functions 'rime-after-change-function))
+    (unless (string= current-input-method "rime")
+      (activate-input-method 'rime)))
+
+  (defun rime-stop ()
+    "If current input method is rime, disable it and remove `rime-after-change-function' hook"
+    (interactive)
+    (when (member 'rime-after-change-function after-change-functions)
+      (remove-hook 'after-change-functions 'rime-after-change-function))
+    (when (string= current-input-method "rime")
+      (rime-mode -1)))
+
   ;; Use English if return t,
   ;; use Chinese if return nil.
   (defun rime-english-mode ()
     "Start new line with English.
-Chinese followed by Chinese.
+Chinnnnnnnese followed by Chinese.
 Space followed by English."
-    (if (> (point) (save-excursion (back-to-indentation) (point)))
-        (not (looking-back "\\cc" 1))
-      t))
+    (cond
+     ((boundp 'rime-manual-lang) rime-manual-lang)
+     (t (not (looking-back "\\cc" 1)))))
 
   (defun rime-chinese-mode ()
     "Start new line with Chinese.
 Chinese followed by Chinese.
 English followed by English.
 Space followed by English."
-    ;; (activate-input-method 'rime)
     (cond
+     ((boundp 'rime-manual-lang) rime-manual-lang)
      ((and (org-in-src-block-p) (not (looking-back "\\cc" 1))) t)
      ((> (point) (save-excursion (back-to-indentation) (point)))
       (if (looking-back " +" 1)
@@ -105,20 +131,29 @@ Space followed by English."
   (defun rime-switch-mode ()
     "Switch between Chinese and English modes."
     (interactive)
-    (activate-input-method 'rime)
+    (rime-start)
+    (when (boundp 'rime-manual-lang) (makunbound 'rime-manual-lang))
     (if (member 'rime-chinese-mode rime-disable-predicates)
-        (setq rime-disable-predicates '(rime-english-mode)
-              rime-input-mode "ENGLISH")
-      (setq rime-disable-predicates '(rime-chinese-mode)
-            rime-input-mode "CHINESE"))
+        (progn (setq rime-disable-predicates '(rime-english-mode)
+                     rime-input-mode "English Mode")
+               (flycheck-mode 1))
+      (progn (setq rime-disable-predicates '(rime-chinese-mode)
+                   rime-input-mode "中文模式")
+             (flycheck-mode -1)))
     (if (string= current-input-method "rime")
-        (message "Current input mode is %s" rime-input-mode)))
+        (message "%s" rime-input-mode)))
 
-  (defun chin/half-Chinese-symbols ()
-    "Toggle full symbols into half width"
-    ))
-
-
+  (defun rime-change-state-manually ()
+    "Change input mode temporarily, after file is modified, this staus is lost."
+    (interactive)
+    (rime-start)
+    (setq rime-manual-lang
+          (if (boundp 'rime-manual-lang)
+              (not rime-manual-lang)
+            (not (seq-find 'funcall rime-disable-predicates))))
+    (if rime-manual-lang
+        (message "临时英文")
+      (message "临时中文"))))
 
 (use-package cal-china-x
   :after calendar

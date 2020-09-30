@@ -1,5 +1,5 @@
 (use-package org-static-blog
-  :load-path "~/repos/org-static-blog/"
+  :load-path "~/Repos/org-static-blog/"
   :init
   (setq org-static-blog-publish-title "Aeghn"
         org-static-blog-publish-url "https://wangz.me/"

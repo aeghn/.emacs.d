@@ -10,7 +10,7 @@
 ;;;;;;  (0 0 0 0))
 ;;; Generated autoloads from quelpa-use-package.el
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "quelpa-use-package" '("quelpa-use-package-" "use-package-")))
+(register-definition-prefixes "quelpa-use-package" '("quelpa-use-package-" "use-package-"))
 
 ;;;***
 

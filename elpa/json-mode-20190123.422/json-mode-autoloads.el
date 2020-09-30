@@ -45,7 +45,7 @@ Print the path to the node at point to the minibuffer, and yank to the kill ring
 (autoload 'json-mode-beautify "json-mode" "\
 Beautify / pretty-print the active region (or the entire buffer if no active region)." t nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "json-mode" '("json-")))
+(register-definition-prefixes "json-mode" '("json-"))
 
 ;;;***
 

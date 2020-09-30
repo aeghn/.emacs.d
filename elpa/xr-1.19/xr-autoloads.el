@@ -71,7 +71,7 @@ See `xr' for a description of the DIALECT argument.
 
 \(fn SKIP-SET-STRING &optional DIALECT)" nil nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "xr" '("xr-")))
+(register-definition-prefixes "xr" '("xr-"))
 
 ;;;***
 

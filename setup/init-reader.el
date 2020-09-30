@@ -1,7 +1,7 @@
 (use-package elfeed                     ;
   :hook (elfeed-show-mode . chin/elfeed-show-setup)
   :preface
-  (defvar chin/elfeed-org-file "~/orgs/rss.org")
+  (defvar chin/elfeed-org-file "~/Documents/orgs/rss.org")
   :bind (("M-m e" . elfeed)
          :map elfeed-search-mode-map
          ("g" . (lambda ()
@@ -68,12 +68,5 @@
     (visual-line-mode 1)
     (olivetti-mode 1)))
 
-(use-package beancount
-  :defer t
-  :load-path "/usr/elisp/"
-  :bind ("M-m b" . (lambda() (interactive) (find-file "~/docs/beancount/main.bean")))
-  :mode ("\\.bean\\(?:count\\)?\\'" . beancount-mode)
-  :hook (beancount-mode . yas-minor-mode-on)
-  :custom (beancount-accounts-files (directory-files "~/docs/beancount/accounts" 'full (rx ".bean" eos))))
 
 (provide 'init-reader)

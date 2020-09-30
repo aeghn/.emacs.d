@@ -39,7 +39,7 @@
 ;; (add-hook 'after-init-hook 'benchmark-init/deactivate)
 ;; Choose different load mode
 (defvar chin/emacs-load-mode (getenv "_EMACS_LOAD_MODE_"))
- (cond ((not chin/emacs-load-mode)
+(cond ((not chin/emacs-load-mode)
        (progn
          (require 'init-default)
          (require 'init-chinese)
@@ -55,6 +55,8 @@
          (require 'init-ui)
          (require 'init-cc)
          (require 'init-dired)
+         (require 'jinp)
+         (require 'init-life)
          (require 'init-interface)))
       ((string-equal "chinbox" chin/emacs-load-mode)
        (progn

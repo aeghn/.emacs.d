@@ -1,125 +1,76 @@
 ;;; init-org.el --- Org's settings
 
-;;; Commentary
-;; Wang Chung's Emacs config
-
-;; Inspired by https://zzamboni.org/post/beautifying-org-mode-in-emacs/
-
-;;; Code:
-
-;; ;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; Beautify
-;;
-;; ;;;;;;;;;;;;;;;;;;;;;;
-
-;; Hide markup
-;;(setq org-hide-emphasis-markers t)
-
-;; org-bullets
-;; (use-package org-bullets
-;;   :config
-;;   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
-
-;; ;; use org-bullets-mode for utf8 symbols as org bullets
-;; (require 'org-bullets)
-;; (setq org-bullets-face-name (quote org-bullet-face))
-;; (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
-;; (setq org-bullets-bullet-list '("◉" "◎" "☉" "○"))
-;;  "◉"  "▣" "◈" "◬"
-;;"㊎" "㊍" "㊌" "㊋" "㊏"
-
-;; org ellipsis options, other than the default Go to Node.
-;; not supported in common font, but supported in Symbola (my fall-back font) ⬎,     ⤷, ⤵
-;; Use variable width font faces in current buffer
-
-;; Setting fonts for org-mode
-
-;; (add-hook 'org-mode-hook
-;;           (lambda ()
-;;             (setq buffer-face-mode-face '(:family "FZJuZhenXinFang-R-JF"))
-;;             (buffer-face-mode)))
-
 (use-package org
   :bind
   (("C-RET" . org-insert-heading-after-current))
   :config
 
+  ;;; Look and feel.
   (use-package org-superstar
     :config
     (setq org-superstar-headline-bullets-list '("᯿"))
     (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1))))
 
   (use-package valign
-    :load-path "/home/chin/.emacs.d/site-lisp/valign")
+    :hook (org-mode-hook . valign-mode)
+    :load-path "~/.emacs.d/site-lisp/valign")
 
+  (setq org-hide-emphasis-markers nil)
   (setq org-ellipsis " ...")
 
-  ;; make available "org-bullet-face" such that I can control the font size individually
-  ;; (setq org-bullets-face-name (quote org-bullet-face))
-  (setq org-log-done 'time)
-  (setq org-hide-emphasis-markers nil)
-  (setq org-src-tab-acts-natively t)
 
-  ;;(add-hook 'org-mode-hook 'visual-line-mode)
+  ;;; GTD part
+  (setq org-log-done 'time)
+
   (setq org-todo-keywords
         '((sequence "TODO(t)" "STARTED(s)" "WAIT(w)" "|" "DONE(d)" "CANCELED(c)")))
 
   ;; change the color of the done headline
   (setq org-fontify-whole-heading-line t
         org-fontify-done-headline t
-        org-fontify-quote-and-verse-blocks t
-        )
+        org-fontify-quote-and-verse-blocks t)
 
-  ;; Open pdf files with pdf-tools
-  (eval-after-load 'org '(require 'org-pdfview))
-  (add-to-list 'org-file-apps
-               '("\\.pdf\\'" . (lambda (file link)
-                                 (org-pdfview-open link))))
-
-  (require 'org-capture)
-  (setq org-capture-templates
-        '(("t" "ToDo" entry (file (expand-file-name "test.org" default-directory))
-           "* TODO %^{ToDo}\n  ADDED: %U " :empty-lines 1 :kill-buffer t)
-          ("n" "Note" entry (file "~/orgs/chinbox/inbox.org")
-           "* %^{note}\n     %U " :empty-lines 1 :kill-buffer t)))
-  (global-set-key (kbd "C-c o c") 'org-capture)
-  ;; (setq org-agenda-files (list "~/orgs/chinbox/inbox.org"))
   (global-set-key (kbd "C-c o a") 'org-agenda)
 
+
+  (use-package org-capture
+    :init
+    (setq org-capture-templates
+          '(("t" "ToDo" entry (file (expand-file-name "test.org" default-directory))
+             "* TODO %^{ToDo}\n  ADDED: %U " :empty-lines 1 :kill-buffer t)
+            ("n" "Note" entry (file "~/Documents/orgs/chinbox/inbox.org")
+             "* %^{note}\n     %U " :empty-lines 1 :kill-buffer t)))
+    (global-set-key (kbd "C-c o c") 'org-capture))
+
+  ;;; Literal programming
+  (setq org-confirm-babel-evaluate nil
+        org-src-fontify-natively t
+        org-src-tab-acts-natively t)
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((dot . t)))
+
+  ;;; Org-mode enhance tools
   (use-package org-download
     :hook (org-mode-hook . org-download-enable))
 
-  ;; (use-package org-roam
-  ;; (setq org-roam-directory "~/orgs/org-roam/"))
-  ;;
-  ;; ;; (use-package org-roam-server
-  ;;   :after org-roam
-  ;;   :config
-  ;;   (setq org-roam-server-host "127.0.0.1"
-  ;;         org-roam-server-port 8078
-  ;;         org-roam-server-export-inline-images t
-  ;;         org-roam-server-authenticate nil
-  ;;         org-roam-server-label-truncate t
-  ;;         org-roam-server-label-truncate-length 60
-  ;;         org-roam-server-label-wrap-length 20)
-  ;;   (defun org-roam-server-open ()
-  ;;     "Ensure the server is active, then open the roam graph."
-  ;;     (interactive)
-  ;;     (org-roam-server-mode 1)
-  ;;     (browse-url-xdg-open (format "http://localhost:%d" org-roam-server-port)))))
-)
   (defun org-docs-insert-image-from-clipboard ()
     "Take a screenshot into a time stamped unique-named file in the
    same directory as the org-buffer and insert a link to this file."
     (interactive)
-    (setq pic-dir-name (concat default-directory "pics")
-          jpg-file-name (concat pic-dir-name "/" (format-time-string "%Y%m%d_%H%M%S.jpg")))
-    (shell-command (concat "mkdir -p " pic-dir-name " && xclip -selection clipboard -t image/png -o >" jpg-file-name))
-    (insert (concat "[[file:" jpg-file-name "]]")))
+    (let*  ((pic-dir-name (concat default-directory "pics"))
+            (jpg-file-name (concat pic-dir-name "/" (format-time-string "%Y%m%d_%H%M%S.jpg"))))
+      (shell-command (concat "mkdir -p " pic-dir-name " && xclip -selection clipboard -t image/png -o >" jpg-file-name))
+      (insert (concat "[[file:" jpg-file-name "]]"))))
 
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((dot . t))) ; this line activates dot
+  :custom
+  (org-refile-use-cache t)
+  (org-refile-file-list (directory-files-recursively "~/Documents/orgs" "\\.org$"))
+  (org-refile-targets '((org-refile-file-list . (:maxlevel . 6))))
+  (org-refile-use-outline-path 'file)
+  (org-outline-path-complete-in-steps nil)
+  (org-refile-allow-creating-parent-nodes 'confirm)
+  (org-refile-use-outline-path t)
+  )
 
-  (provide 'init-org)
+(provide 'init-org)

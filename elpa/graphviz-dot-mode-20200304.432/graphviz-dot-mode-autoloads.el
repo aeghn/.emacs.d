@@ -16,7 +16,7 @@ In the signature, COMMAND, ARG and IGNORED are mandated by `company-mode'.
 
 \(fn COMMAND &optional ARG &rest IGNORED)" t nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "company-graphviz-dot" '("company-g")))
+(register-definition-prefixes "company-graphviz-dot" '("company-g"))
 
 ;;;***
 
@@ -63,7 +63,7 @@ Saving the file will no longer also update the preview." t nil)
 
 (add-to-list 'auto-mode-alist '("\\.gv\\'" . graphviz-dot-mode))
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "graphviz-dot-mode" '("dot-menu" "graphviz-")))
+(register-definition-prefixes "graphviz-dot-mode" '("dot-menu" "graphviz-"))
 
 ;;;***
 

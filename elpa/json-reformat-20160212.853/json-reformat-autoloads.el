@@ -18,7 +18,7 @@ and `json-reformat:pretty-string?'.
 
 \(fn BEGIN END)" t nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "json-reformat" '("json-reformat")))
+(register-definition-prefixes "json-reformat" '("json-reformat"))
 
 ;;;***
 

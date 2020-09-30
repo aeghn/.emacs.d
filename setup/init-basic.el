@@ -1,5 +1,28 @@
 ;; font settings.
+(defun chin/set-font ()
+  (set-face-attribute
+   'default nil
+   :font (font-spec :family "Roboto Mono"
+                    :weight 'Regular
+                    :size 14))
+  (dolist (charset '(kana han symbol cjk-misc bopomofo))
+    (set-fontset-font
+     (frame-parameter nil 'font)
+     charset
+     (font-spec :family "Adobe Heiti Std"
+                :weight 'normal)))
+  (use-cjk-char-width-table 'zh_CN)
+  (setq face-font-rescale-alist '(("Adobe Heiti Std" . 1.0))))
+
+(add-hook 'after-make-frame-functions
+          (lambda (frame)
+            (select-frame frame)
+            (if (display-graphic-p)
+                (chin/set-font))
+            ))
+
 (setq inhibit-compacting-font-caches t)
+
 
 
 ;; Backup file and auto save default files
@@ -32,14 +55,13 @@
 ;; (setq use-package-always-ensure t)
 ;; (setq use-package-always-defer t)
 (require 'use-package)
-(setq quelpa-update-melpa-p nil)
-(require 'quelpa-use-package)
 
 (use-package no-littering
-  :demand t
-  :init
+:demand t
+:init
   (setq no-littering-etc-directory chin/temporary-files-directory)
-  (setq no-littering-var-directory chin/temporary-files-directory))
+  (setq no-littering-var-directory chin/temporary-files-directory)
+  (require 'no-littering))
 
 (defun chin/move-beginning-of-line ()
   "Move point back to indentation of beginning of line or beginning of line."
@@ -104,9 +126,6 @@
 ;;          (content (s-replace "<" "\\<" content))
 ;;          (content (s-replace ">" "\\>" content)))
 ;;     (insert content)))
-
-
-
 
 ;; (bind-key "C-y" 'replace-before-paste)
 

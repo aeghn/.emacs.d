@@ -16,7 +16,7 @@ See the documentation of `company-backends' for COMMAND and ARG.
 
 \(fn COMMAND &optional ARG &rest _)" t nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "company-lsp" '("company-lsp-")))
+(register-definition-prefixes "company-lsp" '("company-lsp-"))
 
 ;;;***
 
